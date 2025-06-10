@@ -10,15 +10,22 @@ class Server
 
         findUser = new User
         {
-            name = "Veronika",
-            password = "123456"
+            lastName = "Veronika",
+            firstName = "Veronika",
+            middleName = "Veronika",
+            phoneNumber = "+3801234567890",
+            password = "StrongPass123"
         };
-        
+
+
         result = userVerifier.FindUserInJson(findUser);
         Console.WriteLine(result ? "User found" : "User not found");
 
         result = userVerifier.WriteUserToJson(findUser);
         result = userVerifier.FindUserInJson(findUser);
         Console.WriteLine(result ? "User found" : "User not found");
+
+        result = userVerifier.ValidateUserData(findUser);
+        Console.WriteLine(result ? "Is valid" : "Is not valid");
     }
 }

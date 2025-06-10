@@ -1,14 +1,30 @@
 [
   {
-    "name": "Veronika",
-    "password": "12345"
+    "lastName": "Veronika",
+    "firstName": "Veronika",
+    "middleName": "Veronika",
+    "phoneNumber": "52",
+    "password": "1234"
   },
   {
-    "name": "Volodymyr",
-    "password": "01234"
+    "lastName": "Veronika",
+    "firstName": "Veronika",
+    "middleName": "Veronika",
+    "phoneNumber": "52",
+    "password": "1234"
   },
   {
-    "name": "Veronika",
-    "password": "123456"
+    "lastName": "Veronika",
+    "firstName": "Veronika",
+    "middleName": "Veronika",
+    "phoneNumber": "+52",
+    "password": "1234"
+  },
+  {
+    "lastName": "Veronika",
+    "firstName": "Veronika",
+    "middleName": "Veronika",
+    "phoneNumber": "+3801234567890",
+    "password": "StrongPass123"
   }
 ]
