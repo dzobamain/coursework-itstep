@@ -1,7 +1,10 @@
 # Build results
+# bin/
 *.dll
 *.exe
 *.pdb
+*.deps.json
+*.runtimeconfig.json
 obj/
 
 
