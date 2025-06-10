@@ -26,3 +26,13 @@ Before running the project, make sure you have the following installed:
   ```cmd
   git --version
   ```
+
+- **Newtonsoft.Json package** (for JSON serialization)  
+  Install via NuGet Package Manager Console in Visual Studio:  
+  ```powershell
+  Install-Package Newtonsoft.Json
+  ```
+  Or via .NET CLI:  
+  ```bash
+  dotnet add package Newtonsoft.Json
+  ```
