@@ -5,25 +5,20 @@ class Server
     static void Main(string[] args)
     {
         UserVerifier userVerifier = new UserVerifier();
-        User user;
+        User findUser;
         bool result;
 
-        user = new User
+        findUser = new User
         {
             name = "Veronika",
-            password = "12345"
+            password = "123456"
         };
+        
+        result = userVerifier.FindUserInJson(findUser);
+        Console.WriteLine(result ? "User found" : "User not found");
 
-        userVerifier.SetUser(user);
-        result = userVerifier.WriteUserToJson(userVerifier.GetUser());
-
-        user = new User
-        {
-            name = "Volodymyr",
-            password = "01234"
-        };
-
-        userVerifier.SetUser(user);
-        result = userVerifier.WriteUserToJson(userVerifier.GetUser());
+        result = userVerifier.WriteUserToJson(findUser);
+        result = userVerifier.FindUserInJson(findUser);
+        Console.WriteLine(result ? "User found" : "User not found");
     }
 }
