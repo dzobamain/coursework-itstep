@@ -1,0 +1,30 @@
+# Build results
+# bin/
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+obj/
+
+
+# VS temporary files
+*.vspscc
+*.vssscc
+*.ncb
+*.log
+*.sdf
+*.cache
+*.dbmdl
+*.pdb
+
+# Backup files
+*.bak
+
+# Windows image thumbnail cache
+Thumbs.db
+
+# .NET Core
+.vs/
+*.db
+*.DS_Store
