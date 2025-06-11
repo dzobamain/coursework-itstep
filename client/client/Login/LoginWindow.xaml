@@ -8,6 +8,7 @@
         Title="LoginWindow" Height="700" Width="800">
     <Grid Background="#f0eeee">
         <Label Content="НОВА ПОШТА" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="#ca0c0c" FontWeight="Bold" FontSize="24" FontStyle="Normal"/>
+        
         <Grid Width="350px" Margin="0,77,0,0" Background="White" HorizontalAlignment="Center" Height="500" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.4*"/>
@@ -17,6 +18,7 @@
                 <RowDefinition Height="0.5"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Label Content="ВХІД" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="16" FontWeight="DemiBold" Foreground="#e61f1f"/>
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gray" ResizeDirection="Rows" />
             <Grid Grid.Row="2">
@@ -25,6 +27,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    
                     <Grid Grid.Row="0">
                         <Label Content="Введіть мобільний номер" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" FontWeight="DemiBold" FontSize="16" Margin="60,23,0,0"/>
                         <Label Content="+" HorizontalAlignment="Right" Margin="0,0,285,25" VerticalAlignment="Bottom"/>
@@ -43,12 +46,14 @@
                     </Grid>
                 </Grid>
             </Grid>
+            
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition Height="43.271"/>
                 </Grid.RowDefinitions>
+                
                 <Button x:Name="registerButton" Grid.Row ="0" Background="White" Content="Зареєструватися" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" Margin="58,10,0,0" Foreground="Gray" FontSize="14" BorderThickness="0"/>
                 <Button x:Name="loginAsCompanyButton" Grid.Row="1" Background="White" Content="Увійти як компанія" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Margin="61,0,0,0" Foreground="Gray" FontSize="14" BorderThickness="0"/>
                 <Button x:Name="continueButton" Grid.Row="2" Content="Далі" HorizontalAlignment="Center" VerticalAlignment="Center" Width="220" Height="30" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Foreground="White" BorderThickness="0,0,0,0">
@@ -66,6 +71,7 @@
                     </Button.Template>
                 </Button>
             </Grid>
+            
             <GridSplitter Grid.Row="4" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gray" ResizeDirection="Rows" />
             <TextBox Foreground="Gray" Width="220px" Height="80" Grid.Row="5" TextWrapping="Wrap" Text="Продовжуючи, я підтверджую що ознайомлений (а) з Політикою конфіденційності та даю згоду на обробку моїх персональних даних" BorderThickness="0"/>
         </Grid>

@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * RegisterWindow.xaml.cs
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace client.Register
 {
-    /// <summary>
-    /// Логика взаимодействия для RegisterWindow.xaml
-    /// </summary>
     public partial class RegisterWindow : Window
     {
         public RegisterWindow()
