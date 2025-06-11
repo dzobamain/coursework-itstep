@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace NP
+namespace client.Register
 {
     /// <summary>
-    /// Логика взаимодействия для RegisterWindows.xaml
+    /// Логика взаимодействия для RegisterWindow.xaml
     /// </summary>
-    public partial class RegisterWindows : Window
+    public partial class RegisterWindow : Window
     {
-        public RegisterWindows()
+        public RegisterWindow()
         {
             InitializeComponent();
         }
