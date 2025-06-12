@@ -1,5 +1,5 @@
 ﻿/*
- * AppWindow.xaml.cs
+ * App.xaml.cs
 */
 
 using System.Configuration;

@@ -1,28 +1,7 @@
 [
   {
-    "lastName": "Veronika",
     "firstName": "Veronika",
-    "middleName": "Veronika",
-    "phoneNumber": "52",
-    "password": "1234"
-  },
-  {
     "lastName": "Veronika",
-    "firstName": "Veronika",
-    "middleName": "Veronika",
-    "phoneNumber": "52",
-    "password": "1234"
-  },
-  {
-    "lastName": "Veronika",
-    "firstName": "Veronika",
-    "middleName": "Veronika",
-    "phoneNumber": "+52",
-    "password": "1234"
-  },
-  {
-    "lastName": "Veronika",
-    "firstName": "Veronika",
     "middleName": "Veronika",
     "phoneNumber": "+3801234567890",
     "password": "StrongPass123"

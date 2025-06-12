@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 class Server
 {
@@ -10,22 +11,13 @@ class Server
 
         findUser = new User
         {
-            lastName = "Veronika",
             firstName = "Veronika",
+            lastName = "Veronika",
             middleName = "Veronika",
             phoneNumber = "+3801234567890",
             password = "StrongPass123"
         };
 
-
-        result = userVerifier.FindUserInJson(findUser);
-        Console.WriteLine(result ? "User found" : "User not found");
-
-        result = userVerifier.WriteUserToJson(findUser);
-        result = userVerifier.FindUserInJson(findUser);
-        Console.WriteLine(result ? "User found" : "User not found");
-
-        result = userVerifier.ValidateUserData(findUser);
-        Console.WriteLine(result ? "Is valid" : "Is not valid");
+        userVerifier.WriteNewUserToJson(findUser);
     }
 }
