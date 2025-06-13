@@ -11,15 +11,25 @@ using System.Text.RegularExpressions;
 
 namespace client.Register
 {
-    class Data
+    class DataFormatter
     {
         private readonly string dataPath; /* Path to the user data file */
         private User user;
 
-        public Data()
+        public DataFormatter()
         {
             dataPath = GetDataPath();
         }
+
+        public void SetUser(User newUser)
+        {
+            user = newUser;
+        }
+        public User GetUser()
+        {
+            return user;
+        }
+
         private static string GetDataPath()
         {
             if (OperatingSystem.IsWindows())
@@ -38,8 +48,7 @@ namespace client.Register
             {
                 /* Check if any name fields are empty */
                 if (string.IsNullOrWhiteSpace(user.firstName) ||
-                    string.IsNullOrWhiteSpace(user.lastName) ||
-                    string.IsNullOrWhiteSpace(user.middleName))
+                    string.IsNullOrWhiteSpace(user.lastName))
                 {
                     return false;
                 }

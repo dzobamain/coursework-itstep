@@ -36,6 +36,24 @@ namespace client.Register
                 phoneNumber = telephoneNumberTextBox.Text,
                 password = passwordTextBox.Text
             };
+
+            DataFormatter dataFormatter = new DataFormatter();
+            dataFormatter.SetUser(newUser);
+
+            if (!dataFormatter.ValidateUserData() || newUser.password != repeatPasswordTextBox.Text)
+            {
+                ToDefault();
+            }
+        }
+
+        private void ToDefault()
+        {
+            nameTextBox.Text = string.Empty;
+            lastNameTextBox.Text = string.Empty;
+            fatherlyTextBox.Text = string.Empty;
+            telephoneNumberTextBox.Text = string.Empty;
+            passwordTextBox.Text = string.Empty;
+            repeatPasswordTextBox.Text = string.Empty;
         }
     }
 }
