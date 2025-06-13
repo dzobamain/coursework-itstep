@@ -58,6 +58,7 @@
                         <TextBox x:Name="passwordTextBox" Margin="0,0,49,5" TextWrapping="Wrap" FontSize="16"  BorderThickness="0,0,0,1" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="186"/>
                     </Grid>
                 </Grid>
+                
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -75,7 +76,7 @@
                 </Grid>
                 
                 <Grid Grid.Row="3">
-                    <Button x:Name ="createAccountButton"  Margin="50,21,31,10" Foreground="White" BorderThickness="0,0,0,0" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Content="Створити акаунт">
+                    <Button x:Name ="createAccountButton" Click="CreateAccountButton_Click" Margin="50,21,31,10" Foreground="White" BorderThickness="0,0,0,0" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Content="Створити акаунт">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}"
