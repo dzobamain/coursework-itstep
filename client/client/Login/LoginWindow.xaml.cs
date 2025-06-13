@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using client.Register;
 
 namespace client.Login
 {
@@ -23,6 +24,23 @@ namespace client.Login
         public LoginWindow()
         {
             InitializeComponent();
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+
+            this.Close();
+        }
+
+        private void ContinueButto_Click(object sender, RoutedEventArgs e)
+        {
+            User newUser = new User
+            {
+                phoneNumber = telephoneNumberTextBox.Text,
+                password = passwordTextBox.Text
+            };
         }
     }
 }

@@ -39,8 +39,7 @@ public class UserVerifier
         {
             /* Check if any name fields are empty */
             if (string.IsNullOrWhiteSpace(user.firstName) ||
-                string.IsNullOrWhiteSpace(user.lastName) ||
-                string.IsNullOrWhiteSpace(user.middleName))
+                string.IsNullOrWhiteSpace(user.lastName))
             {
                 return false;
             }
