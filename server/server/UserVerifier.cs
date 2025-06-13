@@ -98,25 +98,6 @@ public class UserVerifier
         }
     }
 
-    public bool WriteSingleUserToJson(User newUser, string filePath)
-    {
-        try
-        {
-            Directory.CreateDirectory(Path.GetDirectoryName(filePath)); /* Ensure directory exists */
-
-            /* Serialize the User object (without a list) */
-            string json = JsonConvert.SerializeObject(newUser, Formatting.Indented);
-            File.WriteAllText(filePath, json);
-
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error UserVerifier.WriteSingleUserToJson(): {ex}");
-            return false;
-        }
-    }
-
     public User ReadSingleUserFromJson(string filePath)
     {
         try
