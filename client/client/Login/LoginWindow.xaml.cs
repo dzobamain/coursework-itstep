@@ -21,6 +21,7 @@ namespace client.Login
 {
     public partial class LoginWindow : Window
     {
+        private Brush defaultBrush;
         public LoginWindow()
         {
             InitializeComponent();
@@ -41,6 +42,33 @@ namespace client.Login
                 phoneNumber = telephoneNumberTextBox.Text,
                 password = passwordTextBox.Text
             };
+
+            DataFormatter dataFormatter = new DataFormatter();
+            dataFormatter.SetUser(newUser);
+
+            if(!dataFormatter.ValidatePhonePasswordData())
+            {
+                MarkInvalidField();
+                return;
+            }
+
+
+        }
+
+        private async void MarkInvalidField()
+        {
+            if (defaultBrush == null)
+            {
+                defaultBrush = telephoneNumberTextBox.BorderBrush;
+            }
+
+            telephoneNumberTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            passwordTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            await Task.Delay(250);
+
+            telephoneNumberTextBox.BorderBrush = defaultBrush;
+            passwordTextBox.BorderBrush = defaultBrush;
         }
     }
 }

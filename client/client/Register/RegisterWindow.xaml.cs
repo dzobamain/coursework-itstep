@@ -21,6 +21,7 @@ namespace client.Register
 {
     public partial class RegisterWindow : Window
     {
+        private Brush defaultBrush;
         public RegisterWindow()
         {
             InitializeComponent();
@@ -42,18 +43,35 @@ namespace client.Register
 
             if (!dataFormatter.ValidateUserData() || newUser.password != repeatPasswordTextBox.Text)
             {
-                ToDefault();
+                MarkInvalidField();
+                return;
             }
+
+
         }
 
-        private void ToDefault()
+        private async void MarkInvalidField()
         {
-            nameTextBox.Text = string.Empty;
-            lastNameTextBox.Text = string.Empty;
-            fatherlyTextBox.Text = string.Empty;
-            telephoneNumberTextBox.Text = string.Empty;
-            passwordTextBox.Text = string.Empty;
-            repeatPasswordTextBox.Text = string.Empty;
+            if (defaultBrush == null)
+            {
+                defaultBrush = lastNameTextBox.BorderBrush;
+            }
+
+            lastNameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            nameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            fatherlyTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            telephoneNumberTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            passwordTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            repeatPasswordTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            await Task.Delay(250);
+
+            lastNameTextBox.BorderBrush = defaultBrush;
+            nameTextBox.BorderBrush = defaultBrush;
+            fatherlyTextBox.BorderBrush = defaultBrush;
+            telephoneNumberTextBox.BorderBrush = defaultBrush;
+            passwordTextBox.BorderBrush = defaultBrush;
+            repeatPasswordTextBox.BorderBrush = defaultBrush;
         }
     }
 }
