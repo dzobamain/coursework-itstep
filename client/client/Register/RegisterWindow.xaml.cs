@@ -47,7 +47,8 @@ namespace client.Register
                 return;
             }
 
-
+            Send send = new Send();
+            send.WriteSingleUserToJson(newUser);
         }
 
         private async void MarkInvalidField()
