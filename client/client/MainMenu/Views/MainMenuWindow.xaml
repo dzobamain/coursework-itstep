@@ -58,7 +58,7 @@
                     </Grid>
 
                     <Grid Grid.Row="2">
-                        <ListBox x:Name ="allInvoicesListBox" FontSize="14" BorderBrush="#fafafa" BorderThickness="0 4 0 4" HorizontalAlignment="Left" Width="1393">
+                        <ListBox MouseDoubleClick="ShowInformationAboutInvoice_Click" x:Name ="allInvoicesListBox" FontSize="14" BorderBrush="#fafafa" BorderThickness="0 4 0 4" HorizontalAlignment="Left" Width="1393">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="BorderBrush" Value="#fafafa"/>

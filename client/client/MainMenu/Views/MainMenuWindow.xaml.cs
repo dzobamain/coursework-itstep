@@ -31,5 +31,14 @@ namespace client.MainMenu.Views
         {
             _main.CreateNewInvoinceInfoAboutSW();
         }
+
+        private void ShowInformationAboutInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            if(allInvoicesListBox.SelectedIndex != -1)
+            {
+                InformationAboutInvoiceWindow informationAboutInvoiceWindow = new InformationAboutInvoiceWindow();
+                informationAboutInvoiceWindow.ShowDialog();
+            }
+        }
     }
 }
