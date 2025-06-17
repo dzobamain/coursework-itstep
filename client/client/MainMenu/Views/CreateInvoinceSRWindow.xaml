@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="client.MainMenu.Views.CreateInvoinceSRWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:client.MainMenu.Views"
+        mc:Ignorable="d"
+        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Background="#f0eeee">
+        <Label Content="НОВА ПОШТА" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="#ca0c0c" FontWeight="Bold" FontSize="24" FontStyle="Normal"/>
+
+        <Grid Margin="0 77 0 0" Width="600px" Height="450" Background="White" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.14*"/>
+                <RowDefinition Height="0.01*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GridSplitter Grid.Row="1" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gray" ResizeDirection="Rows" />
+
+            <Grid Grid.Row="0">
+                <Button Click="returnBackButton_Click" x:Name="returnBackButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Width="40" Height="40" Margin="10,0,0,0">
+                    <Image Source="/Images/returnBackImage.jpg" />
+                </Button>
+                <Button x:Name="clearButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40" Height="40" Margin="0,4,10,0">
+                    <Image Source="/Images/clearImage.jpg" />
+                </Button>
+                <Label Content="СТВОРЕННЯ НАКЛАДНОЇ" HorizontalAlignment="Center" Margin="24,0,0,0" VerticalAlignment="Center" Foreground="#e61f1f" FontSize="18" FontWeight="DemiBold"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="1.3*"></RowDefinition>
+                    <RowDefinition Height="0.03*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <GridSplitter Grid.Row="3" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gray" ResizeDirection="Rows" />
+
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Foreground="Red" Content="Інформація про отримувача" Margin="0,10,0,10" FontSize="18" HorizontalAlignment="Center" Width="250"/>
+                    <Label Grid.Column="1" Foreground="Red" Content="Інформація про відправника" Margin="0,10,0,10" FontSize="18" HorizontalAlignment="Center" Width="250"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Адреса отримання" HorizontalAlignment="Left" Margin="38,10,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
+                    <TextBox x:Name="receivingAddressTextBox" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="0,0,0,1"/>
+
+                    <Label Grid.Column="1" Content="Адреса відправки" Margin="0,10,38, 0" Foreground="Red" FontSize="14" Height="29" VerticalAlignment="Top" HorizontalAlignment="Right" Width="124"/>
+                    <TextBox x:Name="senderAddressTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="0,0,0,1"/>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Отримувач" HorizontalAlignment="Left" Margin="38,0,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
+                    <TextBox x:Name="fullNameRecieverBox" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,1,1,0"/>
+                    <TextBox x:Name="phoneNumberRecieverBox" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,0,1,1"/>
+
+                    <Label Grid.Column="1" Content="Відправник" HorizontalAlignment="Right" Margin="0,0,38,0" VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
+                    <TextBox x:Name="fullNameSenderBox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,1,1,0"/>
+                    <TextBox x:Name="phoneNumberSenderBox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,0,1,1"/>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <TextBox x:Name="commentTextBox" Margin="43,0,42,0" Height="30" Padding="3" TextWrapping="Wrap" Text="Коментар" FontSize="16" VerticalAlignment="Center" BorderThickness="0,0,0,1"/>
+                </Grid>
+
+
+                <Grid Grid.Row="5">
+                    <Button Click="ContinueButton_Click" x:Name="continueButton" Margin="47,0,39,14" Foreground="White" Height="30" BorderThickness="0,0,0,0" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Content="Далі">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5">
+                                    <ContentPresenter 
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Content}">
+                                    </ContentPresenter>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

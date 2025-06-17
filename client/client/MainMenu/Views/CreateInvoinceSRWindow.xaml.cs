@@ -1,0 +1,38 @@
+﻿//CreateInvoinceSRWindow.xaml.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace client.MainMenu.Views
+{
+    public partial class CreateInvoinceSRWindow : UserControl
+    {
+        MainWindow main;
+        public CreateInvoinceSRWindow(MainWindow main)
+        {
+            InitializeComponent();
+            this.main = main;
+        }
+
+        private void ContinueButton_Click(object sender, RoutedEventArgs e)
+        {
+            main.CreateNewInvoinceInfoAboutParcel();
+        }
+
+        private void returnBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            main.ShowMainMenu();
+        }
+    }
+}
