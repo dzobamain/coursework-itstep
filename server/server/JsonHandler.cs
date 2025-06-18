@@ -33,7 +33,7 @@ namespace server
             }
         }
 
-        public User ReadSingleUserFromJson(string filePath)
+        public User ReadUserFromJson(string filePath)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace server
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error UserVerifier.ReadSingleUserFromJson(): {ex}");
+                Console.WriteLine($"Error UserVerifier.ReadUserFromJson(): {ex}");
                 return new User();
             }
         }
@@ -62,14 +62,17 @@ namespace server
         {
             try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(jsonPath)); /* Ensure directory exists */
+                string? directory = Path.GetDirectoryName(jsonPath);
+                if (!string.IsNullOrWhiteSpace(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
 
                 List<User> allUsers = new List<User>();
 
                 if (File.Exists(jsonPath))
                 {
                     string json = File.ReadAllText(jsonPath);
-
                     if (!string.IsNullOrWhiteSpace(json))
                     {
                         allUsers = JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();

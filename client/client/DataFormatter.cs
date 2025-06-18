@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
-using System.Text.RegularExpressions;
 
 namespace client.Register
 {

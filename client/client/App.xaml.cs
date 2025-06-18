@@ -1,11 +1,9 @@
-﻿/*
- * App.xaml.cs
-*/
-
+﻿using System.IO;
 using System.Windows;
 using client.Login;
 using client.MainMenu;
 using client.Register;
+using Newtonsoft.Json;
 
 namespace client
 {
@@ -16,25 +14,44 @@ namespace client
             this.ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             DataFormatter dataFormatter = new DataFormatter();
             UserDataPath userDataPath = new UserDataPath();
 
-            User user = dataFormatter.ReadUserFromJson(userDataPath.GetPath());
+            string jsonPath = userDataPath.GetPath();
 
-            if (user != null && dataFormatter.ValidateUserData(user))
+            if (!File.Exists(jsonPath))
             {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+                new LoginWindow().Show();
+                return;
+            }
+
+            User user = dataFormatter.ReadUserFromJson(jsonPath);
+
+            if (dataFormatter.ValidateUserData(user))
+            {
+                //string jsonString = await File.ReadAllTextAsync(jsonPath);
+
+                string messageFromServer = await Send.SendJsonAsync(jsonPath);
+                bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
+
+                if (result)
+                {
+                    new MainWindow().Show();
+                }
+                else
+                {
+                    new LoginWindow().Show();
+                }
             }
             else
             {
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.Show();
+                new LoginWindow().Show();
             }
         }
+
     }
 }

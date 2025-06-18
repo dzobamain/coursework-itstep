@@ -1,6 +1,6 @@
 public class User
 {
-    public const string status = "client";
+    public string status { get; set; } = string.Empty; 
     public string regOrLog { get; set; } = string.Empty; /* only "reg" or "log" */
     public string firstName { get; set; } = string.Empty;
     public string lastName { get; set; } = string.Empty;

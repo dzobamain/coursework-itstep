@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace client.Register
 {
@@ -50,6 +53,18 @@ namespace client.Register
 
             UserDataPath userDataPath = new UserDataPath();
             dataFormatter.WriteUserToJson(userDataPath.GetPath(), newUser);
+
+            string exePath = System.IO.Path.ChangeExtension(Assembly.GetEntryAssembly()?.Location, ".exe");
+
+            if (!string.IsNullOrEmpty(exePath) && File.Exists(exePath))
+            {
+                Process.Start(new ProcessStartInfo(exePath)
+                {
+                    UseShellExecute = true
+                });
+            }
+
+            Application.Current.Shutdown();
         }
 
         private async void MarkInvalidField()

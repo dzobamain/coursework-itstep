@@ -6,6 +6,9 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Reflection;
+using System.IO;
 
 using client.Register;
 using client.MainMenu;
@@ -37,6 +40,7 @@ namespace client.Login
         {
             User user = new User
             {
+                status = "client",
                 regOrLog = "log",
                 phoneNumber = telephoneNumberTextBox.Text,
                 password = passwordTextBox.Text
@@ -52,21 +56,29 @@ namespace client.Login
 
             UserDataPath userDataPath = new UserDataPath();
             dataFormatter.WriteUserToJson(userDataPath.GetPath(), user);
+
+            string exePath = Path.ChangeExtension(Assembly.GetEntryAssembly()?.Location, ".exe");
+
+            if (!string.IsNullOrEmpty(exePath) && File.Exists(exePath))
+            {
+                Process.Start(new ProcessStartInfo(exePath)
+                {
+                    UseShellExecute = true // важливо для WPF
+                });
+            }
+
+            Application.Current.Shutdown();
         }
 
         private async void MarkInvalidField()
         {
-            if (telephoneNumberTextBox != null && passwordTextBox != null)
-            {
-                defaultBrush = telephoneNumberTextBox.BorderBrush;
-                telephoneNumberTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                passwordTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            telephoneNumberTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            passwordTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
 
-                await Task.Delay(250);
+            await Task.Delay(250);
 
-                telephoneNumberTextBox.BorderBrush = defaultBrush;
-                passwordTextBox.BorderBrush = defaultBrush;
-            }
+            telephoneNumberTextBox.BorderBrush = defaultBrush;
+            passwordTextBox.BorderBrush = defaultBrush;
         }
     }
 }
