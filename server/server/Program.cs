@@ -1,18 +1,19 @@
-﻿using System;
+﻿using client;
+using server;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
 class Server
 {
     static async Task Main()
     {
         TcpListener server = new TcpListener(IPAddress.Any, 5050);
         server.Start();
-        Console.WriteLine("[SERVER] started, waiting for clients");
+        Console.WriteLine("[SERVER] Started, waiting for <>.");
 
         while (true)
         {
@@ -43,24 +44,33 @@ class Server
 
                 string status = statusElem.GetString();
 
-                if (status == "client")
-                {
-                    User user = JsonSerializer.Deserialize<User>(json);
+                string response = "false";
+                DataFormatter dataFormatter = new DataFormatter();
 
-                    await SendResponse(stream, "true");
-                }
-                else if (status == "courier")
+                switch (status)
                 {
-                    await SendResponse(stream, "true");
+                    case "client":
+                        Console.WriteLine("[SERVER] Client connected.");
+                        User user = JsonSerializer.Deserialize<User>(json);
+                        response = await ProcessClientRequest(user);
+                        break;
+
+                    case "courier":
+                        Console.WriteLine("[SERVER] Courier connected.");
+                        response = "true";
+                        break;
+
+                    case "package":
+                        Console.WriteLine("[SERVER] Package connected.");
+                        response = "true";
+                        break;
+
+                    default:
+                        Console.WriteLine("[SERVER] Invalid status value.");
+                        break;
                 }
-                else if (status == "package")
-                {
-                    await SendResponse(stream, "true");
-                }
-                else
-                {
-                    await SendResponse(stream, "false");
-                }
+
+                await SendResponse(stream, response);
             }
 
             client.Close();
@@ -70,6 +80,38 @@ class Server
             Console.WriteLine($"[SERVER][ERROR] {ex.Message}");
             await SendResponse(stream, "false");
         }
+    }
+
+    static async Task<string> ProcessClientRequest(User user)
+    {
+        string response = "false";
+        DataFormatter dataFormatter = new DataFormatter();
+
+        if (!dataFormatter.ValidateUserData(user))
+        {
+            return response;
+        }
+
+        JsonHandler jsonHandler = new JsonHandler();
+        UsersDataPath usersDataPath = new UsersDataPath();
+
+        if (user.regOrLog == "log")
+        {
+            List<User> users = jsonHandler.ReadUsersFromJson(usersDataPath.GetPath());
+            if(dataFormatter.FindUserInList(users, user))
+            {
+                response = "true";
+                return response;
+            }
+        }
+        if (user.regOrLog == "reg")
+        {
+            bool result = jsonHandler.WriteNewUserToJson(usersDataPath.GetPath(), user);
+            response = result.ToString().ToLower();
+            return response;
+        }
+
+        return response;
     }
 
     static async Task SendResponse(NetworkStream stream, string message)

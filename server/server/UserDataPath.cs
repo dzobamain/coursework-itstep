@@ -19,11 +19,11 @@ namespace client
         {
             if (OperatingSystem.IsWindows())
             {
-                return @"users\userData.json"; /* Windows */
+                return @"users\regusers.json"; /* Windows */
             }
             else
             {
-                return "users/userData.json"; /* Linux/macOS */
+                return "users/regusers.json"; /* Linux/macOS */
             }
         }
 
