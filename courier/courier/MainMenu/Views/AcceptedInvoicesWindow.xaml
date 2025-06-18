@@ -89,7 +89,6 @@
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-
                                             <TextBlock Text="{Binding ArrivalPlace}" Grid.Column="0" VerticalAlignment="Center" Margin="5" />
                                             <TextBlock Text="{Binding DeliveryPlace}" Grid.Column="1" VerticalAlignment="Center" Margin="5" />
                                             <TextBlock Text="{Binding PhoneNumber}" Grid.Column="2" VerticalAlignment="Center" Margin="5" />

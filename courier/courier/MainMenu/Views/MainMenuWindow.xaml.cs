@@ -31,5 +31,14 @@ namespace courier.MainMenu.Views
         {
             _main.ShowAcceptedInvoicesWindow();
         }
+
+        private void AllInvoiceListBox_Click(object sender, RoutedEventArgs e)
+        {
+            if(allInvoicesListBox.SelectedIndex != -1)
+            {
+                InformationAbouitInvoiceInMainMenuWindow infoWindow = new InformationAbouitInvoiceInMainMenuWindow();
+                infoWindow.ShowDialog();
+            }
+        }
     }
 }
