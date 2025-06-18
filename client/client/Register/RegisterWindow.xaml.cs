@@ -35,6 +35,7 @@ namespace client.Register
         {
             User newUser = new User
             {
+                status = "client",
                 regOrLog = "reg",
                 firstName = nameTextBox.Text,
                 lastName = lastNameTextBox.Text,
