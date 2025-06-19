@@ -51,7 +51,7 @@
             <Button Click="returnBack_Click" x:Name="returnBackButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Width="40" Height="40" Margin="10,0,0,0">
                 <Image Source="/Images/returnBackImage.jpg" />
             </Button>
-            <Button x:Name="clearAllButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40" Height="40" Margin="0,4,10,0">
+            <Button Click="ClearButton_Click" x:Name="clearAllButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40" Height="40" Margin="0,4,10,0">
                 <Image Source="/Images/clearImage.jpg" />
             </Button>
         </Grid>

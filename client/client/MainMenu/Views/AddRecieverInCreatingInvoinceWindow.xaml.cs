@@ -26,5 +26,13 @@ namespace client.MainMenu.Views
         {
             this.Close();
         }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            phoneNumberTextBox.Text = string.Empty;
+            lastNameTextBox.Text = string.Empty;
+            firstNameTextBox.Text = string.Empty;
+            middleNameTextBox.Text = string.Empty;
+        }
     }
 }

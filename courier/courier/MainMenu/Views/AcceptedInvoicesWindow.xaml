@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:courier.MainMenu.Views"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid Background="#f0eeee">
         <Label Content="НОВА ПОШТА" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="#ca0c0c" FontWeight="Bold" FontSize="24" FontStyle="Normal"/>
 
@@ -72,7 +72,7 @@
                     </Grid>
 
                     <Grid Grid.Row="4">
-                        <ListBox x:Name="allInvoicesListBox" FontSize="18" BorderBrush="#fafafa" BorderThickness="0 4 0 4" HorizontalContentAlignment="Stretch">
+                        <ListBox MouseDoubleClick="AllInvoiceListBox_Click" x:Name="allInvoicesListBox" FontSize="18" BorderBrush="#fafafa" BorderThickness="0 4 0 4" HorizontalContentAlignment="Stretch">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="BorderBrush" Value="#fafafa"/>

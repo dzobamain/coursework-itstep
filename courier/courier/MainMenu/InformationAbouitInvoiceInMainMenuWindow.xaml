@@ -42,6 +42,9 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Button Click="ReturnBack_Click" x:Name="returnBackButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Width="40" Height="40" Margin="25,0,0,0">
+                <Image Source="/Images/returnBackImage.jpg" />
+            </Button>
             <Label x:Name="invoiceNumberLabel" Content="Номер накладної" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
 
             <Grid Grid.Column="1">

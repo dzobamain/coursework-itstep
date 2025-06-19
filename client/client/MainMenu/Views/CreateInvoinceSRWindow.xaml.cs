@@ -34,5 +34,14 @@ namespace client.MainMenu.Views
         {
             main.ShowMainMenu();
         }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            receivingAddressTextBox.Text = string.Empty;
+            senderAddressTextBox.Text = string.Empty;
+            fullNameRecieverBox.Text = string.Empty;
+            phoneNumberRecieverBox.Text = string.Empty;
+            commentTextBox.Text = string.Empty;
+        }
     }
 }

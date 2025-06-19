@@ -24,5 +24,10 @@ namespace courier.MainMenu
         {
             InitializeComponent();
         }
+
+        private void ReturnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

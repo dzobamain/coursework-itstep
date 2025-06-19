@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainMenu\InformationAboutInvoiceInAcceptedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenu\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +85,9 @@
     </Compile>
     <Compile Include="MainMenu\InformationAbouitInvoiceInMainMenuWindow.xaml.cs">
       <DependentUpon>InformationAbouitInvoiceInMainMenuWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu\InformationAboutInvoiceInAcceptedWindow.xaml.cs">
+      <DependentUpon>InformationAboutInvoiceInAcceptedWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainMenu\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -122,6 +129,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

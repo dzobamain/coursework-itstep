@@ -62,7 +62,7 @@
                     <Image Source="/Images/returnBackImage.jpg" />
                 </Button>
                 <Label Content="СТВОРЕННЯ НАКЛАДНОЇ" Margin="0,10,0,11" Foreground="#e61f1f" FontSize="18" Width="230px" FontWeight="DemiBold"/>
-                <Button x:Name="clearButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40" Height="40" Margin="0,4,10,0" Cursor="">
+                <Button Click="ClearButton_Click" x:Name="clearButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="40" Height="40" Margin="0,4,10,0" Cursor="">
                     <Image Source="/Images/clearImage.jpg" />
                 </Button>
             </Grid>

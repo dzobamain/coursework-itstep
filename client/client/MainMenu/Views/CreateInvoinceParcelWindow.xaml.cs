@@ -29,5 +29,13 @@ namespace client.MainMenu.Views
         {
             main.ShowMainMenu();
         }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            shipmentsDescriptionTextBox.Text = string.Empty;
+            valueTextBox.Text = string.Empty;
+            parcelSizeComboBox.SelectedIndex = -1;
+            packingInBoxCheckBox.IsChecked = false;
+        }
     }
 }
