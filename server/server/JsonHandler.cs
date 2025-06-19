@@ -33,6 +33,30 @@ namespace server
             }
         }
 
+        public List<Courier> ReadCouriersFromJson(string jsonPath)
+        {
+            try
+            {
+                if (!File.Exists(jsonPath))
+                {
+                    return new List<Courier>();
+                }
+
+                string json = File.ReadAllText(jsonPath);
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    return new List<Courier>();
+                }
+
+                return JsonConvert.DeserializeObject<List<Courier>>(json) ?? new List<Courier>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error UserVerifier.ReadUsersFromJson(): {ex}");
+                return new List<Courier>();
+            }
+        }
+
         public User ReadUserFromJson(string filePath)
         {
             try

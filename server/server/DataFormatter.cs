@@ -43,11 +43,42 @@ public class DataFormatter
         return true;
     }
 
+    public bool ValidateCourierData(Courier courier)
+    {
+        if (string.IsNullOrWhiteSpace(courier.phoneNumber) ||
+            string.IsNullOrWhiteSpace(courier.password))
+        {
+            return false;
+        }
+
+        /* Check phone number (must contain only digits and '+') */
+        if (!Regex.IsMatch(courier.phoneNumber, @"^\+?\d+$"))
+        {
+            return false;
+        }
+
+        /* Check password (must be at least 8 characters long) */
+        if (courier.password.Length < 8)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public bool FindUserInList(in List<User> allUsers, User inputUser)
     {
         /* Search for a user in the list by phone number and password */
         return allUsers.Exists(u =>
             u.password.Equals(inputUser.password) &&
             u.phoneNumber.Equals(inputUser.phoneNumber));
+    }
+
+    public bool FindCourierInList(in List<Courier> allCouriers, Courier courier)
+    {
+        /* Search for a user in the list by phone number and password */
+        return allCouriers.Exists(u =>
+            u.password.Equals(courier.password) &&
+            u.phoneNumber.Equals(courier.phoneNumber));
     }
 }

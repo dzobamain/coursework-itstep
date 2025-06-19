@@ -13,16 +13,13 @@ namespace client.Register
 
         public static async Task<string> SendJsonAsync(string jsonFilePath)
         {
-            const int port = 5050;
-            const string serverIp = "127.0.0.1";
-
             try
             {
                 string json = await File.ReadAllTextAsync(jsonFilePath);
                 Console.WriteLine("[CLIENT] JSON до відправки:\n" + json);
 
                 using TcpClient client = new TcpClient();
-                await client.ConnectAsync(serverIp, port);
+                await client.ConnectAsync(server, port);
 
                 using NetworkStream stream = client.GetStream();
 

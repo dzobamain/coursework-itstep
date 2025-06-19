@@ -57,7 +57,8 @@ class Server
 
                     case "courier":
                         Console.WriteLine("[SERVER] Courier connected.");
-                        response = "true";
+                        Courier сourier = JsonSerializer.Deserialize<Courier>(json);
+                        response = await ProcessCourierRequest(сourier);
                         break;
 
                     case "package":
@@ -93,11 +94,11 @@ class Server
         }
 
         JsonHandler jsonHandler = new JsonHandler();
-        UsersDataPath usersDataPath = new UsersDataPath();
+        DataPath usersDataPath = new DataPath();
 
         if (user.regOrLog == "log")
         {
-            List<User> users = jsonHandler.ReadUsersFromJson(usersDataPath.GetPath());
+            List<User> users = jsonHandler.ReadUsersFromJson(usersDataPath.GetUsersPath());
             if(dataFormatter.FindUserInList(users, user))
             {
                 response = "true";
@@ -106,8 +107,31 @@ class Server
         }
         if (user.regOrLog == "reg")
         {
-            bool result = jsonHandler.WriteNewUserToJson(usersDataPath.GetPath(), user);
+            bool result = jsonHandler.WriteNewUserToJson(usersDataPath.GetUsersPath(), user);
             response = result.ToString().ToLower();
+            return response;
+        }
+
+        return response;
+    }
+
+    static async Task<string> ProcessCourierRequest(Courier сourier)
+    {
+        string response = "false";
+        DataFormatter dataFormatter = new DataFormatter();
+
+        if (!dataFormatter.ValidateCourierData(сourier))
+        {
+            return response;
+        }
+
+        JsonHandler jsonHandler = new JsonHandler();
+        DataPath dataPath = new DataPath();
+
+        List<Courier> сouriers = jsonHandler.ReadCouriersFromJson(dataPath.GetCouriersPath());
+        if (dataFormatter.FindCourierInList(сouriers, сourier))
+        {
+            response = "true";
             return response;
         }
 
