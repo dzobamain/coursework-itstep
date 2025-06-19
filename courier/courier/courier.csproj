@@ -51,6 +51,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Підключення GMap.NET через NuGet -->
+    <PackageReference Include="GMap.NET.WindowsPresentation" Version="1.9.5" />
+  </ItemGroup>
+  <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -60,10 +64,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainMenu\InformationAboutInvoiceInAcceptedWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainMenu\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,9 +88,6 @@
     </Compile>
     <Compile Include="MainMenu\InformationAboutInvoiceInAcceptedWindow.xaml.cs">
       <DependentUpon>InformationAboutInvoiceInAcceptedWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainMenu\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainMenu\Views\AcceptedInvoicesWindow.xaml.cs">
       <DependentUpon>AcceptedInvoicesWindow.xaml</DependentUpon>

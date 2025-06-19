@@ -21,7 +21,7 @@ namespace courier.MainMenu.Views
     public partial class MainMenuWindow : UserControl
     {
         private MainWindow _main;
-        private courier.MainWindow mainWindow;
+        private courier.MainMenu.MainWindow mainWindow;
 
         public MainMenuWindow(MainWindow main)
         {
