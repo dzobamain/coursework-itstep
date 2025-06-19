@@ -5,7 +5,11 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
+using courier.MainMenu;
+using client.Login;
+using GMap.NET.MapProviders;
 
 namespace courier
 {
@@ -16,10 +20,41 @@ namespace courier
             this.ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
 
-        private void OnStartup(object sender, StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
-            MainMenu.MainWindow mainWindow = new MainMenu.MainWindow();
-            mainWindow.Show();
+            base.OnStartup(e);
+
+            DataFormatter dataFormatter = new DataFormatter();
+            CourierDataPath userDataPath = new CourierDataPath();
+
+            string jsonPath = userDataPath.GetPath();
+
+            if (!File.Exists(jsonPath))
+            {
+                new LoginWindow().Show();
+                return;
+            }
+
+            Courier user = dataFormatter.ReadUserFromJson(jsonPath);
+
+            if (dataFormatter.ValidateUserData(user))
+            {
+                string messageFromServer = await Send.SendJsonAsync(jsonPath);
+                bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
+
+                if (result)
+                {
+                    new MainWindow().Show();
+                }
+                else
+                {
+                    new LoginWindow().Show();
+                }
+            }
+            else
+            {
+                new LoginWindow().Show();
+            }
         }
     }
 }
