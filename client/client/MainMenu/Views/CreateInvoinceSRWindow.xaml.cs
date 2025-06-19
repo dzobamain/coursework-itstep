@@ -1,5 +1,6 @@
 ﻿//CreateInvoinceSRWindow.xaml.cs
 
+using GMap.NET.MapProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,12 @@ namespace client.MainMenu.Views
             fullNameRecieverBox.Text = string.Empty;
             phoneNumberRecieverBox.Text = string.Empty;
             commentTextBox.Text = string.Empty;
+        }
+
+        private void RecieverInformation_Click(object sender, RoutedEventArgs e)
+        {
+            AddRecieverInCreatingInvoinceWindow addRecieverWindow = new AddRecieverInCreatingInvoinceWindow();
+            addRecieverWindow.ShowDialog();
         }
     }
 }

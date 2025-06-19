@@ -124,7 +124,7 @@
                 </Grid>
 
                 <Grid Grid.Row="5">
-                    <Button x:Name="continueButton" Margin="35,0,35,14" Foreground="White" Height="30" BorderThickness="0,0,0,0" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Content="Далі">
+                    <Button Click="CreateParcelButton_Click" x:Name="createParcelButton" Margin="35,20,35,0" Foreground="White" Height="30" BorderThickness="0,0,0,0" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Content="Створити посилку">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}"
@@ -138,6 +138,8 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                    <Label FontSize="14" Content="Ціна за доставку:" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Top"/>
+                    <Label FontSize="14" Foreground="Gray" Content="Ціна" HorizontalAlignment="Left" Margin="150,0,0,0" VerticalAlignment="Top"/>
                 </Grid>
 
             </Grid>

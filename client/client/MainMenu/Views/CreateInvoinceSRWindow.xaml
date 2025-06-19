@@ -68,8 +68,8 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Отримувач" HorizontalAlignment="Left" Margin="38,0,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
-                    <TextBox x:Name="fullNameRecieverBox" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,1,1,0"/>
-                    <TextBox x:Name="phoneNumberRecieverBox" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,0,1,1"/>
+                    <TextBox MouseDoubleClick="RecieverInformation_Click" x:Name="fullNameRecieverBox" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,1,1,0" IsReadOnly="True"/>
+                    <TextBox MouseDoubleClick="RecieverInformation_Click" x:Name="phoneNumberRecieverBox" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,0,1,1" IsReadOnly="True"/>
 
                     <Label Grid.Column="1" Content="Відправник" HorizontalAlignment="Right" Margin="0,0,38,0" VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
                     <TextBox x:Name="fullNameSenderBox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Padding="3" Margin="0,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="220" FontSize="16" BorderThickness="1,1,1,0"/>

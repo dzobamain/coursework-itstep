@@ -37,5 +37,10 @@ namespace client.MainMenu.Views
             parcelSizeComboBox.SelectedIndex = -1;
             packingInBoxCheckBox.IsChecked = false;
         }
+
+        private void CreateParcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            main.ShowMainMenu();
+        }
     }
 }
