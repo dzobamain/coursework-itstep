@@ -20,6 +20,7 @@ namespace client.MainMenu.Views
     public partial class CreateInvoinceSRWindow : UserControl
     {
         MainWindow main;
+        RecipientData recipient;
         public CreateInvoinceSRWindow(MainWindow main)
         {
             InitializeComponent();
@@ -28,6 +29,14 @@ namespace client.MainMenu.Views
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
+            GlobalData.invoice.pecipientAddress = receivingAddressTextBox.Text;
+            GlobalData.invoice.recipientData = recipient;
+
+            GlobalData.invoice.ShippingAddress = senderAddressTextBox.Text;
+            GlobalData.invoice.ShippingData = fullNameSenderBox.Text;
+
+            GlobalData.invoice.ParcelComment = commentTextBox.Text;
+
             main.CreateNewInvoinceInfoAboutParcel();
         }
 
@@ -47,8 +56,13 @@ namespace client.MainMenu.Views
 
         private void RecieverInformation_Click(object sender, RoutedEventArgs e)
         {
-            AddRecieverInCreatingInvoinceWindow addRecieverWindow = new AddRecieverInCreatingInvoinceWindow();
-            addRecieverWindow.ShowDialog();
+            var addRecieverWindow = new AddRecieverInCreatingInvoinceWindow();
+            bool? result = addRecieverWindow.ShowDialog();
+
+            if (result == true)
+            {
+                recipient = addRecieverWindow.Recipient;
+            }
         }
     }
 }

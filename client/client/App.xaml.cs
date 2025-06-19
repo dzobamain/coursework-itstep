@@ -2,6 +2,7 @@
 using System.Windows;
 using client.Login;
 using client.MainMenu;
+using client.MainMenu.Views;
 using client.Register;
 using Newtonsoft.Json;
 
@@ -35,8 +36,8 @@ namespace client
             {
                 //string jsonString = await File.ReadAllTextAsync(jsonPath);
 
-                string messageFromServer = await Send.SendJsonAsync(jsonPath);
-                bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
+                //string messageFromServer = await Send.SendJsonAsync(jsonPath);
+                bool result = true; //!string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
 
                 if (result)
                 {
@@ -52,6 +53,10 @@ namespace client
                 new LoginWindow().Show();
             }
         }
+    }
 
+    public static class GlobalData
+    {
+        public static Invoice invoice { get; set; }
     }
 }

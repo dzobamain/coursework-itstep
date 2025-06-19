@@ -18,6 +18,8 @@ namespace client.MainMenu.Views
 {
     public partial class AddRecieverInCreatingInvoinceWindow : Window
     {
+        public RecipientData Recipient { get; private set; }
+
         public AddRecieverInCreatingInvoinceWindow()
         {
             InitializeComponent();
@@ -33,6 +35,20 @@ namespace client.MainMenu.Views
             lastNameTextBox.Text = string.Empty;
             firstNameTextBox.Text = string.Empty;
             middleNameTextBox.Text = string.Empty;
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Recipient = new RecipientData
+            {
+                phone = phoneNumberTextBox.Text,
+                firstName = firstNameTextBox.Text,
+                lastName = lastNameTextBox.Text,
+                middleName = middleNameTextBox.Text
+            };
+
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

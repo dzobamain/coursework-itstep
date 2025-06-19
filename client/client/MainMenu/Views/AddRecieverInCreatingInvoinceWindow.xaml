@@ -97,7 +97,7 @@
         </Grid>
 
         <Grid Grid.Row="10">
-            <Button x:Name ="createAccountButton"  Margin="25" Foreground="White" BorderThickness="0,0,0,0" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Content="Додати">
+            <Button x:Name ="createAccountButton" Click="AddButton_Click"  Margin="25" Foreground="White" BorderThickness="0,0,0,0" FontSize="14" FontWeight="SemiBold" Background="#ff4b4b" Content="Додати">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
