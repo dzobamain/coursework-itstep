@@ -2,11 +2,12 @@
 
 public class Invoice
 {
-    public string pecipientAddress { get; set; }
-    public RecipientData recipientData { get; set; }
+    public string PecipientAddress { get; set; } = string.Empty;
+    public RecipientData RecipientData { get; set; } = new RecipientData();
 
-    public string ShippingData { get; set; }
-    public string ShippingAddress { get; set; }
+    public string ShippingData { get; set; } = string.Empty;
+    public string ShippingAddress { get; set; } = string.Empty;
 
-    public string ParcelComment { get; set; }
+    public string ParcelComment { get; set; } = string.Empty;
 }
+

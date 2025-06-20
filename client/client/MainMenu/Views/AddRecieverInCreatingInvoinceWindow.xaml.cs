@@ -41,10 +41,10 @@ namespace client.MainMenu.Views
         {
             Recipient = new RecipientData
             {
-                phone = phoneNumberTextBox.Text,
-                firstName = firstNameTextBox.Text,
-                lastName = lastNameTextBox.Text,
-                middleName = middleNameTextBox.Text
+                Phone = phoneNumberTextBox.Text,
+                FirstName = firstNameTextBox.Text,
+                LastName = lastNameTextBox.Text,
+                MiddleName = middleNameTextBox.Text
             };
 
             this.DialogResult = true;

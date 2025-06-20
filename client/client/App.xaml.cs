@@ -57,6 +57,6 @@ namespace client
 
     public static class GlobalData
     {
-        public static Invoice invoice { get; set; }
+        public static Invoice invoice { get; set; } = new Invoice();
     }
 }
