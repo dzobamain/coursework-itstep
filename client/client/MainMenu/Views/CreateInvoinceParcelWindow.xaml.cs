@@ -19,10 +19,12 @@ namespace client.MainMenu.Views
     public partial class CreateInvoinceParcelWindow : UserControl
     {
         MainWindow main;
+        private Brush defaultBrush;
         public CreateInvoinceParcelWindow(MainWindow main)
         {
             InitializeComponent();
             this.main = main;
+            defaultBrush = shipmentsDescriptionTextBox.BorderBrush;
         }
 
         private void returnBackButton_Click(object sender, RoutedEventArgs e)
@@ -38,9 +40,66 @@ namespace client.MainMenu.Views
             packingInBoxCheckBox.IsChecked = false;
         }
 
-        private void CreateParcelButton_Click(object sender, RoutedEventArgs e)
+        private async void CreateParcelButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(shipmentsDescriptionTextBox.Text) ||
+                parcelSizeComboBox.SelectedItem == null ||
+                (payerSenderRadioButton.IsChecked == false && payerRecieverRadioButton.IsChecked == false) ||
+                (cashRadioButton.IsChecked == false && cardRadioButton.IsChecked == false))
+            {
+                await MarkInvalidFields();
+                return;
+            }
+
+            GlobalData.invoice.ShipmentsDescription = shipmentsDescriptionTextBox.Text;
+
+            if (payerSenderRadioButton.IsChecked == true)
+                GlobalData.invoice.Payer = "sender";
+            else if (payerRecieverRadioButton.IsChecked == true)
+                GlobalData.invoice.Payer = "receiver";
+
+            if (cashRadioButton.IsChecked == true)
+                GlobalData.invoice.PaymentMethod = "cash";
+            else if (cardRadioButton.IsChecked == true)
+                GlobalData.invoice.PaymentMethod = "card";
+
+
             main.ShowMainMenu();
         }
+
+        private async Task MarkInvalidFields()
+        {
+            var redBrush = new SolidColorBrush(Colors.Red);
+
+            if (string.IsNullOrWhiteSpace(shipmentsDescriptionTextBox.Text))
+                shipmentsDescriptionTextBox.BorderBrush = redBrush;
+
+            if (parcelSizeComboBox.SelectedItem == null)
+            {
+                parcelSizeComboBox.BorderBrush = redBrush;
+            }
+
+            if (payerSenderRadioButton.IsChecked == false && payerRecieverRadioButton.IsChecked == false)
+            {
+                payerSenderRadioButton.BorderBrush = redBrush;
+                payerRecieverRadioButton.BorderBrush = redBrush;
+            }
+
+            if (cashRadioButton.IsChecked == false && cardRadioButton.IsChecked == false)
+            {
+                cashRadioButton.BorderBrush = redBrush;
+                cardRadioButton.BorderBrush = redBrush;
+            }
+
+            await Task.Delay(250);
+
+            shipmentsDescriptionTextBox.BorderBrush = defaultBrush;
+            payerSenderRadioButton.BorderBrush = defaultBrush;
+            payerRecieverRadioButton.BorderBrush = defaultBrush;
+            cashRadioButton.BorderBrush = defaultBrush;
+            cardRadioButton.BorderBrush = defaultBrush;
+            parcelSizeComboBox.BorderBrush = defaultBrush;
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 
 public class Invoice
 {
+    // SR
     public string PecipientAddress { get; set; } = string.Empty;
     public RecipientData RecipientData { get; set; } = new RecipientData();
 
@@ -9,5 +10,10 @@ public class Invoice
     public string ShippingAddress { get; set; } = string.Empty;
 
     public string ParcelComment { get; set; } = string.Empty;
+
+    // Parcel 
+    public string ShipmentsDescription { get; set; } = string.Empty;
+    public string Payer { get; set; } = string.Empty;
+    public string PaymentMethod { get; set; } = string.Empty;
 }
 
