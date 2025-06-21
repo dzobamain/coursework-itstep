@@ -54,8 +54,8 @@ namespace client.Login
                 return;
             }
 
-            UserDataPath userDataPath = new UserDataPath();
-            dataFormatter.WriteUserToJson(userDataPath.GetPath(), user);
+            DataPath userDataPath = new DataPath();
+            dataFormatter.WriteUserToJson(userDataPath.GetUserPath(), user);
 
             string exePath = Path.ChangeExtension(Assembly.GetEntryAssembly()?.Location, ".exe");
 

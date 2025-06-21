@@ -2,6 +2,8 @@
 
 public class Invoice
 {
+    public string status { get; set; } = string.Empty;
+    public string OwnerPhoneNumber { get; set; } = string.Empty;
     // SR
     public string PecipientAddress { get; set; } = string.Empty;
     public RecipientData RecipientData { get; set; } = new RecipientData();
@@ -16,4 +18,3 @@ public class Invoice
     public string Payer { get; set; } = string.Empty;
     public string PaymentMethod { get; set; } = string.Empty;
 }
-

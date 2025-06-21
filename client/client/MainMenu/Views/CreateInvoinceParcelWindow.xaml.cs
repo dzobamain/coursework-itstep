@@ -74,32 +74,9 @@ namespace client.MainMenu.Views
             if (string.IsNullOrWhiteSpace(shipmentsDescriptionTextBox.Text))
                 shipmentsDescriptionTextBox.BorderBrush = redBrush;
 
-            if (parcelSizeComboBox.SelectedItem == null)
-            {
-                parcelSizeComboBox.BorderBrush = redBrush;
-            }
-
-            if (payerSenderRadioButton.IsChecked == false && payerRecieverRadioButton.IsChecked == false)
-            {
-                payerSenderRadioButton.BorderBrush = redBrush;
-                payerRecieverRadioButton.BorderBrush = redBrush;
-            }
-
-            if (cashRadioButton.IsChecked == false && cardRadioButton.IsChecked == false)
-            {
-                cashRadioButton.BorderBrush = redBrush;
-                cardRadioButton.BorderBrush = redBrush;
-            }
-
             await Task.Delay(250);
 
             shipmentsDescriptionTextBox.BorderBrush = defaultBrush;
-            payerSenderRadioButton.BorderBrush = defaultBrush;
-            payerRecieverRadioButton.BorderBrush = defaultBrush;
-            cashRadioButton.BorderBrush = defaultBrush;
-            cardRadioButton.BorderBrush = defaultBrush;
-            parcelSizeComboBox.BorderBrush = defaultBrush;
         }
-
     }
 }

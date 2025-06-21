@@ -20,9 +20,9 @@ namespace client
             base.OnStartup(e);
 
             DataFormatter dataFormatter = new DataFormatter();
-            UserDataPath userDataPath = new UserDataPath();
+            DataPath userDataPath = new DataPath();
 
-            string jsonPath = userDataPath.GetPath();
+            string jsonPath = userDataPath.GetUserPath();
 
             if (!File.Exists(jsonPath))
             {

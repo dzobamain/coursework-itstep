@@ -42,6 +42,7 @@ namespace client.MainMenu.Views
                 return;
             }
 
+            GlobalData.invoice.status = "package";
             GlobalData.invoice.PecipientAddress = receivingAddressTextBox.Text;
             GlobalData.invoice.RecipientData = recipient;
             GlobalData.invoice.ShippingAddress = senderAddressTextBox.Text;
