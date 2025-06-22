@@ -1,5 +1,8 @@
-﻿// CreateInvoinceParcelWindow.xaml.cs
+﻿/*
+ * CreateInvoinceParcelWindow.xaml.cs
+ */
 
+using client.Register;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +23,7 @@ namespace client.MainMenu.Views
     {
         MainWindow main;
         private Brush defaultBrush;
+
         public CreateInvoinceParcelWindow(MainWindow main)
         {
             InitializeComponent();
@@ -41,7 +45,6 @@ namespace client.MainMenu.Views
         }
 
         private bool isFirstClick = true;
-
         private string previousDescription = string.Empty;
         private string previousSize = string.Empty;
         private string previousPayer = string.Empty;
@@ -113,10 +116,13 @@ namespace client.MainMenu.Views
             GlobalData.invoice.PaymentMethod = payment;
             GlobalData.invoice.Price = valueTextBox.Text;
 
+            if(!SaveNewInvoice())
+            {
+                return;
+            }
+
             main.ShowMainMenu();
         }
-
-
 
         private async Task MarkInvalidFields()
         {
@@ -128,6 +134,13 @@ namespace client.MainMenu.Views
             await Task.Delay(250);
 
             shipmentsDescriptionTextBox.BorderBrush = defaultBrush;
+        }
+
+        private bool SaveNewInvoice()
+        {
+            DataPath dataPath = new DataPath();
+            JsonHandler jsonHandler = new JsonHandler();
+            return jsonHandler.WriteNewInvoiceToJson(dataPath.GetInvoicePath(), GlobalData.invoice);
         }
     }
 }

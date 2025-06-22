@@ -1,0 +1,21 @@
+[
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "380123456789",
+    "PecipientAddress": "Lutsk",
+    "RecipientData": {
+      "Phone": "+3801234567890",
+      "FirstName": "Veronika",
+      "LastName": "Frau",
+      "MiddleName": "Yep"
+    },
+    "ShippingData": "Name",
+    "ShippingAddress": "Muenchen",
+    "ParcelComment": "Yep",
+    "ShipmentsDescription": "Yep",
+    "Payer": "receiver",
+    "PaymentMethod": "cash",
+    "Price": "173,00"
+  }
+]
