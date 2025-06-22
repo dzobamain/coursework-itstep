@@ -17,5 +17,19 @@
     "Payer": "receiver",
     "PaymentMethod": "cash",
     "Price": "173,00"
+  },
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "380123456789",
+    "PecipientAddress": "adess",
+    "RecipientData": null,
+    "ShippingData": "1",
+    "ShippingAddress": "adress",
+    "ParcelComment": "Коментар",
+    "ShipmentsDescription": "Test addition",
+    "Payer": "receiver",
+    "PaymentMethod": "card",
+    "Price": "89,00"
   }
 ]

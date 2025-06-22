@@ -59,47 +59,16 @@
 
                     <Grid Grid.Row="2">
                         <ListBox x:Name="allInvoicesListBox" FontSize="14" BorderBrush="#fafafa" BorderThickness="0 4 0 4" Margin="20" HorizontalAlignment="Stretch">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="BorderBrush" Value="#ddd"/>
-                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                                    <Setter Property="Padding" Value="10"/>
-                                    <Setter Property="Margin" Value="4"/>
-                                    <Setter Property="Background" Value="White"/>
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="ListBoxItem">
-                                                <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
-                                                    <ContentPresenter Margin="5" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Setter TargetName="Bd" Property="Background" Value="#dceeff"/>
-                                                        <Setter TargetName="Bd" Property="BorderBrush" Value="#3399ff"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-
-                            <!-- Ручні елементи -->
-                            <ListBoxItem>
-                                <StackPanel Orientation="Vertical" Margin="5">
-                                    <TextBlock Text="Invoice #001" FontWeight="Bold" FontSize="16"/>
-                                    <TextBlock Text="2025-06-21" FontSize="12" Foreground="Gray"/>
-                                </StackPanel>
-                            </ListBoxItem>
-
-                            <ListBoxItem>
-                                <StackPanel Orientation="Vertical" Margin="5">
-                                    <TextBlock Text="Invoice #002" FontWeight="Bold" FontSize="16"/>
-                                    <TextBlock Text="2025-06-20" FontSize="12" Foreground="Gray"/>
-                                </StackPanel>
-                            </ListBoxItem>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="White" CornerRadius="6" Padding="10" Margin="4">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding Description}" FontWeight="Bold" FontSize="16"/>
+                                            <TextBlock Text="{Binding Progress}" FontSize="12" Foreground="Gray"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
                         </ListBox>
                     </Grid>
                 </Grid>

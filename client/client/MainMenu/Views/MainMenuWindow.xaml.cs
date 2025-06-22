@@ -15,16 +15,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace client.MainMenu.Views
 {
     public partial class MainMenuWindow : UserControl
     {
         private MainWindow _main;
+        private ObservableCollection<InvoiceDisplayItem> invoices = new ObservableCollection<InvoiceDisplayItem>();
+
         public MainMenuWindow(MainWindow main)
         {
             InitializeComponent();
             _main = main;
+
+            DataPath dataPath = new DataPath();
+            JsonHandler jsonHandler = new JsonHandler();
+            List<Invoice> listInvoice = jsonHandler.ReadInvoiceFromJson(dataPath.GetInvoicePath());
+
+            SetAllInvoiceDisplayItem(listInvoice);
+
+            allInvoicesListBox.ItemsSource = invoices;
+        }
+
+        private void SetAllInvoiceDisplayItem(List<Invoice> listInvoice)
+        {
+            foreach (var invoice in listInvoice)
+            {
+                invoices.Add(new InvoiceDisplayItem
+                {
+                    Description = invoice.ShipmentsDescription,
+                    Progress = invoice.progress
+                });
+            }
         }
 
         private void CreateInvoiceButton_Click(object sender, RoutedEventArgs e)
