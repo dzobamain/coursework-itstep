@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using client;
+using client.Register;
 
 namespace client.MainMenu.Views
 {
@@ -43,6 +44,13 @@ namespace client.MainMenu.Views
             }
 
             GlobalData.invoice.status = "package";
+            GlobalData.invoice.progress = "created";
+
+            DataPath dataPath = new DataPath();
+            DataFormatter dataFormatter = new DataFormatter();
+            User user = dataFormatter.ReadUserFromJson(dataPath.GetUserPath());
+            GlobalData.invoice.OwnerPhoneNumber = user.phoneNumber;
+
             GlobalData.invoice.PecipientAddress = receivingAddressTextBox.Text;
             GlobalData.invoice.RecipientData = recipient;
             GlobalData.invoice.ShippingAddress = senderAddressTextBox.Text;

@@ -1,9 +1,12 @@
 ﻿using client.MainMenu.Views;
+using System;
 
 public class Invoice
 {
-    public string status { get; set; } = string.Empty;
+    public string status { get; set; } = string.Empty; /* package */
+    public string progress { get; set; } = string.Empty; /* created, in_transit, delivered */
     public string OwnerPhoneNumber { get; set; } = string.Empty;
+
     // SR
     public string PecipientAddress { get; set; } = string.Empty;
     public RecipientData RecipientData { get; set; } = new RecipientData();
@@ -15,6 +18,20 @@ public class Invoice
 
     // Parcel 
     public string ShipmentsDescription { get; set; } = string.Empty;
-    public string Payer { get; set; } = string.Empty;
-    public string PaymentMethod { get; set; } = string.Empty;
+    public string Payer { get; set; } = string.Empty; /* sender, receiver */
+    public string PaymentMethod { get; set; } = string.Empty; /* card, cash */
+    public string Price { get; set; } = string.Empty;
+
+    public void Reset()
+    {
+        OwnerPhoneNumber = string.Empty;
+        PecipientAddress = string.Empty;
+        RecipientData = new RecipientData();
+        ShippingData = string.Empty;
+        ShippingAddress = string.Empty;
+        ParcelComment = string.Empty;
+        ShipmentsDescription = string.Empty;
+        Payer = string.Empty;
+        PaymentMethod = string.Empty;
+    }
 }

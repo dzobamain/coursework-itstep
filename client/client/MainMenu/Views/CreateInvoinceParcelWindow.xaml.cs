@@ -40,6 +40,14 @@ namespace client.MainMenu.Views
             packingInBoxCheckBox.IsChecked = false;
         }
 
+        private bool isFirstClick = true;
+
+        private string previousDescription = string.Empty;
+        private string previousSize = string.Empty;
+        private string previousPayer = string.Empty;
+        private string previousPayment = string.Empty;
+        private bool previousBoxChecked = false;
+
         private async void CreateParcelButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(shipmentsDescriptionTextBox.Text) ||
@@ -47,25 +55,68 @@ namespace client.MainMenu.Views
                 (payerSenderRadioButton.IsChecked == false && payerRecieverRadioButton.IsChecked == false) ||
                 (cashRadioButton.IsChecked == false && cardRadioButton.IsChecked == false))
             {
+                isFirstClick = true;
                 await MarkInvalidFields();
                 return;
             }
 
-            GlobalData.invoice.ShipmentsDescription = shipmentsDescriptionTextBox.Text;
+            var selectedItem = parcelSizeComboBox.SelectedItem as ComboBoxItem;
+            var selectedContent = selectedItem?.Content?.ToString();
 
-            if (payerSenderRadioButton.IsChecked == true)
-                GlobalData.invoice.Payer = "sender";
-            else if (payerRecieverRadioButton.IsChecked == true)
-                GlobalData.invoice.Payer = "receiver";
+            float value = selectedContent switch
+            {
+                "Документи" => 65f,
+                "Мала(до 2кг)" => 80f,
+                "Середня(до 10кг)" => 110f,
+                "Велика(до 30кг)" => 160f,
+                _ => 0f
+            };
 
-            if (cashRadioButton.IsChecked == true)
-                GlobalData.invoice.PaymentMethod = "cash";
-            else if (cardRadioButton.IsChecked == true)
-                GlobalData.invoice.PaymentMethod = "card";
+            float priceBox = 5f;
+            float procent = 1.05f;
 
+            string description = shipmentsDescriptionTextBox.Text;
+            string size = selectedContent;
+            string payer = payerSenderRadioButton.IsChecked == true ? "sender" : "receiver";
+            string payment = cashRadioButton.IsChecked == true ? "cash" : "card";
+            bool boxChecked = packingInBoxCheckBox.IsChecked == true;
+
+            bool dataChanged = isFirstClick ||
+                               description != previousDescription ||
+                               size != previousSize ||
+                               payer != previousPayer ||
+                               payment != previousPayment ||
+                               boxChecked != previousBoxChecked;
+
+            if (dataChanged)
+            {
+                value *= procent;
+                if (boxChecked)
+                {
+                    value += priceBox;
+                }
+
+                valueTextBox.Text = value.ToString("0.00");
+
+                previousDescription = description;
+                previousSize = size;
+                previousPayer = payer;
+                previousPayment = payment;
+                previousBoxChecked = boxChecked;
+
+                isFirstClick = false;
+                return;
+            }
+
+            GlobalData.invoice.ShipmentsDescription = description;
+            GlobalData.invoice.Payer = payer;
+            GlobalData.invoice.PaymentMethod = payment;
+            GlobalData.invoice.Price = valueTextBox.Text;
 
             main.ShowMainMenu();
         }
+
+
 
         private async Task MarkInvalidFields()
         {
