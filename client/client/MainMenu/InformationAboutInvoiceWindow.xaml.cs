@@ -36,21 +36,48 @@ namespace client.MainMenu
                 return false;
             }
 
-            placeOfSendingLabel.Content = "Адрес відправки " + invoice.ShippingAddress;
-            ProgressLabel.Content = "Прогрес " + invoice.progress;
-            DeliveryPlaceLabel.Content = "Адрес доставки " + invoice.PecipientAddress;
+            if (!string.IsNullOrWhiteSpace(invoice.ShippingAddress))
+                placeOfSendingLabel.Content = "Адрес відправки " + invoice.ShippingAddress;
 
-            ShipmentsDescriptionLabel.Content = invoice.ShipmentsDescription;
-            SenderFullNameLabel.Content = invoice.ShippingData;
-            SenderPhoneNumberLabel.Content = invoice.OwnerPhoneNumber;
+            if (!string.IsNullOrWhiteSpace(invoice.progress))
+                ProgressLabel.Content = "Стан " + invoice.progress;
 
-            ParcelSizeLabel.Content = invoice.ParcelSize;
-            RecipientFullNameLabel.Content = invoice.RecipientData.FirstName + " " + invoice.RecipientData.LastName + " " + invoice.RecipientData.MiddleName;
-            RecipientPhoneNumberLabel.Content = invoice.RecipientData.Phone;
+            if (!string.IsNullOrWhiteSpace(invoice.PecipientAddress))
+                DeliveryPlaceLabel.Content = "Адрес доставки " + invoice.PecipientAddress;
 
-            PriceLabel.Content = invoice.Price;
-            PayerLabel.Content = invoice.Payer;
-            PaymentMethodLabel.Content = invoice.PaymentMethod;
+            if (!string.IsNullOrWhiteSpace(invoice.ShipmentsDescription))
+                ShipmentsDescriptionLabel.Content = invoice.ShipmentsDescription;
+
+            if (!string.IsNullOrWhiteSpace(invoice.ShippingData))
+                SenderFullNameLabel.Content = invoice.ShippingData;
+
+            if (!string.IsNullOrWhiteSpace(invoice.OwnerPhoneNumber))
+                SenderPhoneNumberLabel.Content = invoice.OwnerPhoneNumber;
+
+            if (!string.IsNullOrWhiteSpace(invoice.ParcelSize))
+                ParcelSizeLabel.Content = invoice.ParcelSize;
+
+            string fullName = string.Join(" ", new[] {
+                invoice.RecipientData?.FirstName,
+                invoice.RecipientData?.LastName,
+                invoice.RecipientData?.MiddleName
+                }.Where(s => !string.IsNullOrWhiteSpace(s)));
+
+            if (!string.IsNullOrWhiteSpace(fullName))
+                RecipientFullNameLabel.Content = fullName;
+
+            if (!string.IsNullOrWhiteSpace(invoice.RecipientData?.Phone))
+                RecipientPhoneNumberLabel.Content = invoice.RecipientData.Phone;
+
+            if (!string.IsNullOrWhiteSpace(invoice.Price))
+                PriceLabel.Content = invoice.Price;
+
+            if (!string.IsNullOrWhiteSpace(invoice.Payer))
+                PayerLabel.Content = invoice.Payer;
+
+            if (!string.IsNullOrWhiteSpace(invoice.PaymentMethod))
+                PaymentMethodLabel.Content = invoice.PaymentMethod;
+
 
             return true;
         }
