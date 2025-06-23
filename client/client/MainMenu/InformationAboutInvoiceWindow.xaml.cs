@@ -84,7 +84,7 @@ namespace client.MainMenu
 
         private bool PlaceForMap(Invoice invoice)
         {
-            //Якщо посилка в дорозі
+            // Якщо посилка створена або в дорозі — показати карту з маркером
             if (invoice.progress == "created" || invoice.progress == "in_transit")
             {
                 var mainMap = new GMapControl
@@ -92,19 +92,33 @@ namespace client.MainMenu
                     Name = "MainMap",
                     MapProvider = GMapProviders.OpenStreetMap,
                     Margin = new Thickness(25, 0, 25, 0),
-
                     MinZoom = 2,
                     MaxZoom = 20,
                     Zoom = 15,
                     ShowCenter = false,
                     CanDragMap = true
                 };
+
                 GMaps.Instance.Mode = AccessMode.ServerOnly;
 
-                mainMap.SetPositionByKeywords("Kyiv, Ukraine"); // Позиція карти за ключовими словами
-                mainMap.Position = new PointLatLng(50.4501, 30.5234); // Позиція карти за координатами
+                // Визначити адресу в залежності від статусу
+                string address = invoice.progress == "created"
+                    ? invoice.ShippingAddress
+                    : invoice.PecipientAddress;
 
-                GMapMarker marker = new GMapMarker(mainMap.Position)
+                // Встановити позицію карти за ключовими словами (адресою)
+                if (!string.IsNullOrWhiteSpace(address))
+                {
+                    mainMap.SetPositionByKeywords(address);
+                }
+
+                if (mainMap.Position.Lat == 0 && mainMap.Position.Lng == 0)
+                {
+                    mainMap.Position = new PointLatLng(50.4501, 30.5234); // Київ як дефолт
+                }
+
+                // Додати маркер на карту
+                var marker = new GMapMarker(mainMap.Position)
                 {
                     Shape = new Ellipse
                     {
