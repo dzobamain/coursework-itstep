@@ -112,6 +112,7 @@ namespace client.MainMenu.Views
             }
 
             GlobalData.invoice.ShipmentsDescription = description;
+            GlobalData.invoice.ParcelSize = selectedContent;
             GlobalData.invoice.Payer = payer;
             GlobalData.invoice.PaymentMethod = payment;
             GlobalData.invoice.Price = valueTextBox.Text;

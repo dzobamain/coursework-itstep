@@ -18,6 +18,7 @@ public class Invoice
 
     // Parcel 
     public string ShipmentsDescription { get; set; } = string.Empty;
+    public string ParcelSize { get; set; } = string.Empty;
     public string Payer { get; set; } = string.Empty; /* sender, receiver */
     public string PaymentMethod { get; set; } = string.Empty; /* card, cash */
     public string Price { get; set; } = string.Empty;

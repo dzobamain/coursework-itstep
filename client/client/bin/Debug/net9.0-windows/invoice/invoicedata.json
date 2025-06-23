@@ -14,6 +14,7 @@
     "ShippingAddress": "Muenchen",
     "ParcelComment": "Yep",
     "ShipmentsDescription": "Yep",
+    "ParcelSize": "Мала(до 2кг)",
     "Payer": "receiver",
     "PaymentMethod": "cash",
     "Price": "173,00"
@@ -28,6 +29,7 @@
     "ShippingAddress": "adress",
     "ParcelComment": "Коментар",
     "ShipmentsDescription": "Test addition",
+    "ParcelSize": "Мала(до 2кг)",
     "Payer": "receiver",
     "PaymentMethod": "card",
     "Price": "89,00"

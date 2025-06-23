@@ -26,9 +26,39 @@ namespace client.MainMenu
         public InformationAboutInvoiceWindow()
         {
             InitializeComponent();
+        }
 
+        public bool ShowTheWindow(Invoice invoice)
+        {
+            if (!PlaceForMap(invoice))
+            {
+                this.Close();
+                return false;
+            }
+
+            placeOfSendingLabel.Content = "Адрес відправки " + invoice.ShippingAddress;
+            ProgressLabel.Content = "Прогрес " + invoice.progress;
+            DeliveryPlaceLabel.Content = "Адрес доставки " + invoice.PecipientAddress;
+
+            ShipmentsDescriptionLabel.Content = invoice.ShipmentsDescription;
+            SenderFullNameLabel.Content = invoice.ShippingData;
+            SenderPhoneNumberLabel.Content = invoice.OwnerPhoneNumber;
+
+            ParcelSizeLabel.Content = invoice.ParcelSize;
+            RecipientFullNameLabel.Content = invoice.RecipientData.FirstName + " " + invoice.RecipientData.LastName + " " + invoice.RecipientData.MiddleName;
+            RecipientPhoneNumberLabel.Content = invoice.RecipientData.Phone;
+
+            PriceLabel.Content = invoice.Price;
+            PayerLabel.Content = invoice.Payer;
+            PaymentMethodLabel.Content = invoice.PaymentMethod;
+
+            return true;
+        }
+
+        private bool PlaceForMap(Invoice invoice)
+        {
             //Якщо посилка в дорозі
-            if (true)
+            if (invoice.progress == "created" || invoice.progress == "in_transit")
             {
                 var mainMap = new GMapControl
                 {
@@ -62,9 +92,11 @@ namespace client.MainMenu
 
                 arrivalDateClearLabel.Visibility = Visibility.Hidden;
                 arrivalDateLabel.Visibility = Visibility.Hidden;
+
+                return true;
             }
             //Якщо посилка доставлена
-            else if (false)
+            else if (invoice.progress == "delivered")
             {
                 ImageBrush imageBrush = new ImageBrush
                 {
@@ -75,6 +107,12 @@ namespace client.MainMenu
                 };
                 imageBrush.Viewbox = new Rect(-0.5, 0, 1, 1);
                 container.Background = imageBrush;
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

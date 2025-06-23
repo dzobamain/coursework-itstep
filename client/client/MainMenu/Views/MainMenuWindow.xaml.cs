@@ -23,6 +23,7 @@ namespace client.MainMenu.Views
     {
         private MainWindow _main;
         private ObservableCollection<InvoiceDisplayItem> invoices = new ObservableCollection<InvoiceDisplayItem>();
+        List<Invoice> listInvoice;
 
         public MainMenuWindow(MainWindow main)
         {
@@ -31,7 +32,7 @@ namespace client.MainMenu.Views
 
             DataPath dataPath = new DataPath();
             JsonHandler jsonHandler = new JsonHandler();
-            List<Invoice> listInvoice = jsonHandler.ReadInvoiceFromJson(dataPath.GetInvoicePath());
+            listInvoice = jsonHandler.ReadInvoiceFromJson(dataPath.GetInvoicePath());
 
             SetAllInvoiceDisplayItem(listInvoice);
 
@@ -60,6 +61,12 @@ namespace client.MainMenu.Views
             if(allInvoicesListBox.SelectedIndex != -1)
             {
                 InformationAboutInvoiceWindow informationAboutInvoiceWindow = new InformationAboutInvoiceWindow();
+
+                if (!informationAboutInvoiceWindow.ShowTheWindow(listInvoice[allInvoicesListBox.SelectedIndex]))
+                {
+                    return;
+                }
+
                 informationAboutInvoiceWindow.ShowDialog();
             }
         }
