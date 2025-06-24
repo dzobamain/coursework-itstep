@@ -1,6 +1,4 @@
-﻿using client.MainMenu.Views;
-using System;
-
+﻿
 public class Invoice
 {
     public string status { get; set; } = string.Empty; /* package */

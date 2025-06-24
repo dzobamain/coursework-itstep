@@ -116,5 +116,27 @@ namespace server
                 return false;
             }
         }
+
+        public bool WriteInvoicesToJson(string path, List<Invoice> invoices)
+        {
+            try
+            {
+                string? directory = Path.GetDirectoryName(path);
+                if (!string.IsNullOrWhiteSpace(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                string json = JsonConvert.SerializeObject(invoices, Formatting.Indented);
+                File.WriteAllText(path, json);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error JsonHandler.WriteInvoicesToJson(): {ex.Message}");
+                return false;
+            }
+        }
     }
 }

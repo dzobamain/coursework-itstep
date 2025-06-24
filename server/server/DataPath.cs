@@ -10,11 +10,13 @@ namespace client
     {
         private string userData;
         private string couriserData;
+        private string invoiceData;
 
         public DataPath()
         {
             userData = GetUserDataPath();
             couriserData = GetCourierDataPath();
+            invoiceData = GetInvoiceDataPath();
         }
 
         private static string GetUserDataPath()
@@ -41,6 +43,18 @@ namespace client
             }
         }
 
+        private static string GetInvoiceDataPath()
+        {
+            if (OperatingSystem.IsWindows()) /* Windows */
+            {
+                return @"invoice\invoices.json";
+            }
+            else /* Linux/macOS */
+            {
+                return "invoice/invoices.json";
+            }
+        }
+
         public string GetUsersPath()
         {
             return userData;
@@ -50,6 +64,10 @@ namespace client
         {
             return couriserData;
         }
-    }
 
+        public string GetInvoicePath()
+        {
+            return invoiceData;
+        }
+    }
 }

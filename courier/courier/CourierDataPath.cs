@@ -8,14 +8,16 @@ namespace courier
 {
     public class CourierDataPath
     {
-        private string userData;
+        private string courierData;
+        private string invoiceData;
 
         public CourierDataPath()
         {
-            userData = GetUserDataPath();
+            courierData = SetCourierDataPath();
+            invoiceData = SetInvoiceDataPath();
         }
 
-        private static string GetUserDataPath()
+        private static string SetCourierDataPath()
         {
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows))
             {
@@ -27,9 +29,26 @@ namespace courier
             }
         }
 
-        public string GetPath()
+        private static string SetInvoiceDataPath()
         {
-            return userData;
+            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows))
+            {
+                return @"invoice\invoices.json"; /* Windows */
+            }
+            else
+            {
+                return "invoice/invoices.json"; /* Linux/macOS */
+            }
+        }
+
+        public string GetCourierDataPath()
+        {
+            return courierData;
+        }
+
+        public string GetInvoicePath()
+        {
+            return invoiceData;
         }
     }
 

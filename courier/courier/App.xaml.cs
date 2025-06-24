@@ -27,7 +27,7 @@ namespace courier
             DataFormatter dataFormatter = new DataFormatter();
             CourierDataPath userDataPath = new CourierDataPath();
 
-            string jsonPath = userDataPath.GetPath();
+            string jsonPath = userDataPath.GetCourierDataPath();
 
             if (!File.Exists(jsonPath))
             {
@@ -35,12 +35,12 @@ namespace courier
                 return;
             }
 
-            Courier user = dataFormatter.ReadUserFromJson(jsonPath);
+            Courier user = dataFormatter.ReadCourierFromJson(jsonPath);
 
             if (dataFormatter.ValidateUserData(user))
             {
                 string messageFromServer = await Send.SendJsonAsync(jsonPath);
-                bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
+                bool result = string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
 
                 if (result)
                 {

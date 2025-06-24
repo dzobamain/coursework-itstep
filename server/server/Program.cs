@@ -70,7 +70,7 @@ class Server
                         Console.WriteLine("[SERVER] Invalid status value.");
                         break;
                 }
-
+                response = "true";
                 await SendResponse(stream, response);
             }
 

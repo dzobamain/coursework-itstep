@@ -26,6 +26,8 @@ namespace courier.MainMenu
         public InformationAboutInvoiceInAcceptedWindow()
         {
             InitializeComponent();
+            SetData();
+
             GMap.NET.GMaps.Instance.Mode = AccessMode.ServerOnly;
             MainMap.MapProvider = GMapProviders.GoogleMap;
 
@@ -49,6 +51,11 @@ namespace courier.MainMenu
                 }
             };
             MainMap.Markers.Add(marker);
+        }
+
+        private void SetData()
+        {
+
         }
 
         private void MainMap_MouseDoubleClick(object sender, MouseButtonEventArgs e)

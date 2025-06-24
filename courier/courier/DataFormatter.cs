@@ -53,7 +53,7 @@ namespace courier
             }
         }
 
-        public Courier ReadUserFromJson(string filePath)
+        public Courier ReadCourierFromJson(string filePath)
         {
             try
             {

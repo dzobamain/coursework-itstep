@@ -1,0 +1,39 @@
+[
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "380123456789",
+    "CourierPhoneNumber": "",
+    "PecipientAddress": "Lutsk",
+    "RecipientData": {
+      "Phone": "+3801234567890",
+      "FirstName": "Veronika",
+      "LastName": "Frau",
+      "MiddleName": "Yep"
+    },
+    "ShippingData": "Name",
+    "ShippingAddress": "Muenchen",
+    "ParcelComment": "Yep",
+    "ShipmentsDescription": "Yep",
+    "ParcelSize": "Мала (до 2кг)",
+    "Payer": "receiver",
+    "PaymentMethod": "cash",
+    "Price": "173,00"
+  },
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "380123456789",
+    "CourierPhoneNumber": "",
+    "PecipientAddress": "Odessa",
+    "RecipientData": null,
+    "ShippingData": "1",
+    "ShippingAddress": "Address",
+    "ParcelComment": "Test comment",
+    "ShipmentsDescription": "Test addition",
+    "ParcelSize": "Мала (до 2кг)",
+    "Payer": "receiver",
+    "PaymentMethod": "card",
+    "Price": "89,00"
+  }
+]

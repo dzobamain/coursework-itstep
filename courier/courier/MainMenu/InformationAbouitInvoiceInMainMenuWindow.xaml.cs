@@ -23,6 +23,12 @@ namespace courier.MainMenu
         public InformationAbouitInvoiceInMainMenuWindow()
         {
             InitializeComponent();
+            SetData();
+        }
+
+        private void SetData()
+        {
+            
         }
 
         private void ReturnBack_Click(object sender, RoutedEventArgs e)

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +22,22 @@ namespace courier.MainMenu.Views
     public partial class MainMenuWindow : UserControl
     {
         private MainWindow _main;
-        private courier.MainMenu.MainWindow mainWindow;
+        private ObservableCollection<InvoiceDisplayItem> invoices = new ObservableCollection<InvoiceDisplayItem>();
+        List<Invoice> listInvoice;
+
 
         public MainMenuWindow(MainWindow main)
         {
             InitializeComponent();
             _main = main;
+
+            string path = new CourierDataPath().GetInvoicePath();
+            JsonHandler handler = new JsonHandler();
+
+            listInvoice = handler.ReadInvoiceFromJson(path);
+            SetAllInvoiceDisplayItem(listInvoice);
+            allInvoicesListBox.ItemsSource = invoices;
+
         }
 
         private void AcceptedInvoiceButton_Click(object sender, RoutedEventArgs e)
@@ -34,12 +45,22 @@ namespace courier.MainMenu.Views
             _main.ShowAcceptedInvoicesWindow();
         }
 
-        private void AllInvoiceListBox_Click(object sender, RoutedEventArgs e)
+        private void AllInvoiceListBox_Click(object sender, MouseButtonEventArgs e)
         {
-            if(allInvoicesListBox.SelectedIndex != -1)
+            
+        }
+
+        private void SetAllInvoiceDisplayItem(List<Invoice> allInvoices)
+        {
+            invoices.Clear();
+
+            foreach (var invoice in allInvoices)
             {
-                InformationAbouitInvoiceInMainMenuWindow infoWindow = new InformationAbouitInvoiceInMainMenuWindow();
-                infoWindow.ShowDialog();
+                invoices.Add(new InvoiceDisplayItem
+                {
+                    Description = string.IsNullOrWhiteSpace(invoice.ShipmentsDescription) ? "Без опису" : invoice.ShipmentsDescription,
+                    Progress = string.IsNullOrWhiteSpace(invoice.progress) ? "Невідомо" : invoice.progress
+                });
             }
         }
     }

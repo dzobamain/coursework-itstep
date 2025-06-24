@@ -42,7 +42,7 @@ namespace client.Login
             }
 
             CourierDataPath userDataPath = new CourierDataPath();
-            dataFormatter.WriteUserToJson(userDataPath.GetPath(), user);
+            dataFormatter.WriteUserToJson(userDataPath.GetCourierDataPath(), user);
 
             string exePath = Path.ChangeExtension(Assembly.GetEntryAssembly()?.Location, ".exe");
 
