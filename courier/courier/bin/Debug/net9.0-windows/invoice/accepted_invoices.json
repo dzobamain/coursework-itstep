@@ -1,0 +1,23 @@
+[
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "380123456789",
+    "CourierPhoneNumber": "",
+    "PecipientAddress": "Lutsk",
+    "RecipientData": {
+      "Phone": "+3801234567890",
+      "FirstName": "Veronika",
+      "LastName": "Frau",
+      "MiddleName": "Yep"
+    },
+    "ShippingData": "John Doe",
+    "ShippingAddress": "Muenchen",
+    "ParcelComment": "Handle with care",
+    "ShipmentsDescription": "Clothes",
+    "ParcelSize": "Мале (до 2кг)",
+    "Payer": "receiver",
+    "PaymentMethod": "cash",
+    "Price": "173,00"
+  }
+]

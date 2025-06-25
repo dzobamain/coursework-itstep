@@ -64,7 +64,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="Місце прибуття" Foreground="Red" Grid.Column="0" Margin="15,0,0,0" VerticalAlignment="Center" FontSize="16"/>
@@ -93,13 +94,20 @@
                                                 <TextBlock Text="{Binding Description}" FontWeight="Bold" FontSize="16"/>
                                                 <TextBlock Text="{Binding Progress}" FontSize="12" Foreground="Gray"/>
                                             </StackPanel>
-                                            <CheckBox x:Name="TakeOrderCheckBox" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" />
-
+                                            <CheckBox Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"
+                              IsChecked="{Binding IsSelected, Mode=TwoWay}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+
+                        <Grid Grid.Row="5" Margin="20,0,20,20">
+                            <Button x:Name="SaveSelectedInvoicesButton" Content="Зберегти вибрані" 
+                            HorizontalAlignment="Right" Width="150" Height="35" 
+                            Click="SaveSelectedInvoicesButton_Click"
+                            Background="#ff4b4b" Foreground="White" BorderThickness="0" />
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>

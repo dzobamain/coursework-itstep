@@ -1,21 +1,14 @@
 ﻿/*
-    MainMenuWindow.xaml
- */
+    MainMenuWindow.xaml.cs
+*/
 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace courier.MainMenu.Views
 {
@@ -24,7 +17,6 @@ namespace courier.MainMenu.Views
         private MainWindow _main;
         private ObservableCollection<InvoiceDisplayItem> invoices = new ObservableCollection<InvoiceDisplayItem>();
         List<Invoice> listInvoice;
-
 
         public MainMenuWindow(MainWindow main)
         {
@@ -37,7 +29,6 @@ namespace courier.MainMenu.Views
 
             SetAllInvoiceDisplayItem(listInvoice);
             allInvoicesListBox.ItemsSource = invoices;
-
         }
 
         private void AcceptedInvoiceButton_Click(object sender, RoutedEventArgs e)
@@ -69,9 +60,45 @@ namespace courier.MainMenu.Views
                 invoices.Add(new InvoiceDisplayItem
                 {
                     Description = string.IsNullOrWhiteSpace(invoice.ShipmentsDescription) ? "Без опису" : invoice.ShipmentsDescription,
-                    Progress = string.IsNullOrWhiteSpace(invoice.progress) ? "Невідомо" : invoice.progress
+                    Progress = string.IsNullOrWhiteSpace(invoice.progress) ? "Невідомо" : invoice.progress,
+                    IsSelected = false,
+                    OriginalInvoice = invoice
                 });
             }
         }
+
+        private void SaveSelectedInvoices()
+        {
+            var selectedInvoices = invoices
+                .Where(item => item.IsSelected)
+                .Select(item => item.OriginalInvoice)
+                .ToList();
+
+            if (selectedInvoices.Count == 0)
+            {
+                MessageBox.Show("Виберіть накладні для збереження");
+                return;
+            }
+
+            JsonHandler jsonHandler = new JsonHandler();
+            string savePath = new CourierDataPath().GetAcceptedInvoicePath();
+
+            bool success = jsonHandler.WriteInvoicesToJson(savePath, selectedInvoices);
+
+            MessageBox.Show(success ? "Вибрані накладні збережено" : "Помилка під час збереження накладних");
+        }
+
+        private void SaveSelectedInvoicesButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveSelectedInvoices();
+        }
+    }
+
+    public class InvoiceDisplayItem
+    {
+        public string Description { get; set; }
+        public string Progress { get; set; }
+        public bool IsSelected { get; set; }
+        public Invoice OriginalInvoice { get; set; }
     }
 }
