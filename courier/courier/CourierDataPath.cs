@@ -1,55 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace courier
 {
     public class CourierDataPath
     {
-        private string courierData;
-        private string invoiceData;
+        private readonly string courierData;
+        private readonly string invoiceData;
+        private readonly string acceptedInvoiceData;
 
         public CourierDataPath()
         {
             courierData = SetCourierDataPath();
             invoiceData = SetInvoiceDataPath();
+            acceptedInvoiceData = SetAcceptedInvoicePath();
         }
 
         private static string SetCourierDataPath()
         {
-            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows))
-            {
-                return @"courier\cdata.json"; /* Windows */
-            }
-            else
-            {
-                return "courier/cdata.json"; /* Linux/macOS */
-            }
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? @"courier\cdata.json"
+                : "courier/cdata.json";
         }
 
         private static string SetInvoiceDataPath()
         {
-            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows))
-            {
-                return @"invoice\invoices.json"; /* Windows */
-            }
-            else
-            {
-                return "invoice/invoices.json"; /* Linux/macOS */
-            }
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? @"invoice\invoices.json"
+                : "invoice/invoices.json";
         }
 
-        public string GetCourierDataPath()
+        private static string SetAcceptedInvoicePath()
         {
-            return courierData;
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? @"invoice\accepted_invoices.json"
+                : "invoice/accepted_invoices.json";
         }
 
-        public string GetInvoicePath()
-        {
-            return invoiceData;
-        }
+        public string GetCourierDataPath() => courierData;
+        public string GetInvoicePath() => invoiceData;
+        public string GetAcceptedInvoicePath() => acceptedInvoiceData;
     }
-
 }

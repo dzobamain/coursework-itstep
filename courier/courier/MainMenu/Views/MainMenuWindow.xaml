@@ -75,19 +75,27 @@
 
                     <Grid Grid.Row="4">
                         <ListBox x:Name="allInvoicesListBox"
-                            FontSize="14"
-                            BorderBrush="#fafafa"
-                            BorderThickness="0 4 0 4"
-                            Margin="20"
-                            HorizontalAlignment="Stretch"
-                            MouseDoubleClick="AllInvoiceListBox_Click">
+                        FontSize="14"
+                        BorderBrush="#fafafa"
+                        BorderThickness="0 4 0 4"
+                        Margin="20"
+                        HorizontalAlignment="Stretch"
+                        MouseDoubleClick="AllInvoiceListBox_Click">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border Background="White" CornerRadius="6" Padding="10" Margin="4">
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="{Binding Description}" FontWeight="Bold" FontSize="16"/>
-                                            <TextBlock Text="{Binding Progress}" FontSize="12" Foreground="Gray"/>
-                                        </StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Vertical" Grid.Column="0">
+                                                <TextBlock Text="{Binding Description}" FontWeight="Bold" FontSize="16"/>
+                                                <TextBlock Text="{Binding Progress}" FontSize="12" Foreground="Gray"/>
+                                            </StackPanel>
+                                            <CheckBox x:Name="TakeOrderCheckBox" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" />
+
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
