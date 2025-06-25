@@ -79,5 +79,40 @@ namespace courier
                 return false;
             }
         }
+
+        public bool WriteNewInvoiceToJson(string path, Invoice newiInvoices)
+        {
+            try
+            {
+                string? directory = Path.GetDirectoryName(path);
+                if (!string.IsNullOrWhiteSpace(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                List<Invoice> allUsers = new List<Invoice>();
+
+                if (File.Exists(path))
+                {
+                    string json = File.ReadAllText(path);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        allUsers = JsonConvert.DeserializeObject<List<Invoice>>(json) ?? new List<Invoice>();
+                    }
+                }
+
+                allUsers.Add(newiInvoices);
+
+                string updatedJson = JsonConvert.SerializeObject(allUsers, Formatting.Indented);
+                File.WriteAllText(path, updatedJson);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error JsonHandler.WriteNewInvoiceToJson(): {ex}");
+                return false;
+            }
+        }
     }
 }

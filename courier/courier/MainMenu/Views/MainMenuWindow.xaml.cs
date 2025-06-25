@@ -24,12 +24,22 @@ namespace courier.MainMenu.Views
             _main = main;
 
             string path = new CourierDataPath().GetInvoicePath();
+            string acceptedPath = new CourierDataPath().GetAcceptedInvoicePath();
+
             JsonHandler jsonHandler = new JsonHandler();
+
             listInvoice = jsonHandler.ReadInvoiceFromJson(path);
 
-            SetAllInvoiceDisplayItem(listInvoice);
+            List<Invoice> acceptedInvoices = jsonHandler.ReadInvoiceFromJson(acceptedPath);
+
+            var filteredInvoices = listInvoice
+                .Where(inv => !acceptedInvoices.Any(acc => acc.ShipmentsDescription == inv.ShipmentsDescription)) // порівняння по унікальному Id
+                .ToList();
+
+            SetAllInvoiceDisplayItem(filteredInvoices);
             allInvoicesListBox.ItemsSource = invoices;
         }
+
 
         private void AcceptedInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
@@ -83,10 +93,34 @@ namespace courier.MainMenu.Views
             JsonHandler jsonHandler = new JsonHandler();
             string savePath = new CourierDataPath().GetAcceptedInvoicePath();
 
-            bool success = jsonHandler.WriteInvoicesToJson(savePath, selectedInvoices);
+            bool success = false;
+            foreach (var invoice in selectedInvoices)
+            {
+                success = jsonHandler.WriteNewInvoiceToJson(savePath, invoice);
+                if (!success)
+                {
+                    MessageBox.Show("Помилка під час збереження накладних");
+                    return;
+                }
+            }
 
-            MessageBox.Show(success ? "Вибрані накладні збережено" : "Помилка під час збереження накладних");
+            if (success)
+            {
+                MessageBox.Show("Вибрані накладні збережено");
+
+                var acceptedInvoices = jsonHandler.ReadInvoiceFromJson(savePath);
+
+                var filteredInvoices = listInvoice
+                    .Where(inv => !acceptedInvoices.Any(acc => acc.ShipmentsDescription == inv.ShipmentsDescription))
+                    .ToList();
+
+                listInvoice = filteredInvoices;
+
+                invoices.Clear();
+                SetAllInvoiceDisplayItem(filteredInvoices);
+            }
         }
+
 
         private void SaveSelectedInvoicesButton_Click(object sender, RoutedEventArgs e)
         {
