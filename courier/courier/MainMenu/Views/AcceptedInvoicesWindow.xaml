@@ -72,26 +72,25 @@
                     </Grid>
 
                     <Grid Grid.Row="4">
-                        <ListBox MouseDoubleClick="AllInvoiceListBox_Click" x:Name="allInvoicesListBox" FontSize="18" BorderBrush="#fafafa" BorderThickness="0 4 0 4" HorizontalContentAlignment="Stretch">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="BorderBrush" Value="#fafafa"/>
-                                    <Setter Property="BorderThickness" Value="0,0,0,4"/>
-                                    <Setter Property="Padding" Value="8,4"/>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
+                        <ListBox x:Name="allInvoicesListBox"
+                        FontSize="14"
+                        BorderBrush="#fafafa"
+                        BorderThickness="0 4 0 4"
+                        Margin="20"
+                        HorizontalAlignment="Stretch"
+                        MouseDoubleClick="AllInvoiceListBox_Click">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="5">
-                                        <Grid HorizontalAlignment="Stretch">
+                                    <Border Background="White" CornerRadius="6" Padding="10" Margin="4">
+                                        <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding ArrivalPlace}" Grid.Column="0" VerticalAlignment="Center" Margin="5" />
-                                            <TextBlock Text="{Binding DeliveryPlace}" Grid.Column="1" VerticalAlignment="Center" Margin="5" />
-                                            <TextBlock Text="{Binding PhoneNumber}" Grid.Column="2" VerticalAlignment="Center" Margin="5" />
+                                            <StackPanel Orientation="Vertical" Grid.Column="0">
+                                                <TextBlock Text="{Binding Description}" FontWeight="Bold" FontSize="16"/>
+                                                <TextBlock Text="{Binding Progress}" FontSize="12" Foreground="Gray"/>
+                                            </StackPanel>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
