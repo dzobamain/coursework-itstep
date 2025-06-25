@@ -9,6 +9,10 @@ using System.Text.Json;
 using System.Threading.Tasks;
 class Server
 {
+    public Server()
+    {
+
+    }
     static async Task Main()
     {
         TcpListener server = new TcpListener(IPAddress.Any, 5050);
@@ -70,7 +74,7 @@ class Server
                         Console.WriteLine("[SERVER] Invalid status value.");
                         break;
                 }
-                response = "true";
+                response = "true"; //TEST
                 await SendResponse(stream, response);
             }
 
@@ -131,7 +135,6 @@ class Server
         List<Courier> сouriers = jsonHandler.ReadCouriersFromJson(dataPath.GetCouriersPath());
         if (dataFormatter.FindCourierInList(сouriers, сourier))
         {
-            response = "true";
             return response;
         }
 

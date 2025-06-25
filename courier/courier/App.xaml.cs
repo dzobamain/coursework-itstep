@@ -40,7 +40,7 @@ namespace courier
             if (dataFormatter.ValidateUserData(user))
             {
                 string messageFromServer = await Send.SendJsonAsync(jsonPath);
-                bool result = string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
+                bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
 
                 if (result)
                 {
