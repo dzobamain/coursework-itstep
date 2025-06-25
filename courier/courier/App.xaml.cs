@@ -42,6 +42,8 @@ namespace courier
                 string messageFromServer = await Send.SendJsonAsync(jsonPath);
                 bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
 
+                result = true; //TEST
+
                 if (result)
                 {
                     new MainWindow().Show();

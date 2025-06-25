@@ -9,10 +9,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 class Server
 {
-    public Server()
-    {
-
-    }
     static async Task Main()
     {
         TcpListener server = new TcpListener(IPAddress.Any, 5050);
@@ -57,25 +53,29 @@ class Server
                         Console.WriteLine("[SERVER] Client connected.");
                         User user = JsonSerializer.Deserialize<User>(json);
                         response = await ProcessClientRequest(user);
+
+                        await SendResponse(stream, response);
                         break;
 
                     case "courier":
                         Console.WriteLine("[SERVER] Courier connected.");
                         Courier сourier = JsonSerializer.Deserialize<Courier>(json);
                         response = await ProcessCourierRequest(сourier);
+
+                        await SendResponse(stream, response);
                         break;
 
                     case "package":
                         Console.WriteLine("[SERVER] Package connected.");
                         response = "true";
+
+                        await SendResponse(stream, response);
                         break;
 
                     default:
                         Console.WriteLine("[SERVER] Invalid status value.");
                         break;
                 }
-                response = "true"; //TEST
-                await SendResponse(stream, response);
             }
 
             client.Close();
@@ -139,6 +139,11 @@ class Server
         }
 
         return response;
+    }
+
+    static async Task<string> ProcessInvoiceRequest(Invoice invoice)
+    {
+
     }
 
     static async Task SendResponse(NetworkStream stream, string message)

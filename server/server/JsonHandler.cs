@@ -117,7 +117,7 @@ namespace server
             }
         }
 
-        public bool WriteInvoicesToJson(string path, List<Invoice> invoices)
+        public bool WriteNewInvoiceToJson(string path, Invoice newiInvoices)
         {
             try
             {
@@ -127,14 +127,27 @@ namespace server
                     Directory.CreateDirectory(directory);
                 }
 
-                string json = JsonConvert.SerializeObject(invoices, Formatting.Indented);
-                File.WriteAllText(path, json);
+                List<Invoice> allUsers = new List<Invoice>();
+
+                if (File.Exists(path))
+                {
+                    string json = File.ReadAllText(path);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        allUsers = JsonConvert.DeserializeObject<List<Invoice>>(json) ?? new List<Invoice>();
+                    }
+                }
+
+                allUsers.Add(newiInvoices);
+
+                string updatedJson = JsonConvert.SerializeObject(allUsers, Formatting.Indented);
+                File.WriteAllText(path, updatedJson);
 
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error JsonHandler.WriteInvoicesToJson(): {ex.Message}");
+                Console.WriteLine($"Error JsonHandler.WriteNewInvoiceToJson(): {ex}");
                 return false;
             }
         }

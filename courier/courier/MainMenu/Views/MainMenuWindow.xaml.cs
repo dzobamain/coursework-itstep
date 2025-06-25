@@ -32,9 +32,9 @@ namespace courier.MainMenu.Views
             _main = main;
 
             string path = new CourierDataPath().GetInvoicePath();
-            JsonHandler handler = new JsonHandler();
+            JsonHandler jsonHandler = new JsonHandler();
+            listInvoice = jsonHandler.ReadInvoiceFromJson(path);
 
-            listInvoice = handler.ReadInvoiceFromJson(path);
             SetAllInvoiceDisplayItem(listInvoice);
             allInvoicesListBox.ItemsSource = invoices;
 
@@ -47,7 +47,17 @@ namespace courier.MainMenu.Views
 
         private void AllInvoiceListBox_Click(object sender, MouseButtonEventArgs e)
         {
-            
+            if (allInvoicesListBox.SelectedIndex != -1)
+            {
+                InformationAbouitInvoiceInMainMenuWindow informationAboutInvoiceWindow = new();
+
+                if (!informationAboutInvoiceWindow.SetAllData(listInvoice[allInvoicesListBox.SelectedIndex]))
+                {
+                    return;
+                }
+
+                informationAboutInvoiceWindow.ShowDialog();
+            }
         }
 
         private void SetAllInvoiceDisplayItem(List<Invoice> allInvoices)
