@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:courier.MainMenu"
         mc:Ignorable="d"
         Title="TTN" Height="00" Width="1000"
-        MinWidth="600" MinHeight="450">
+        MinWidth="600" MinHeight="500">
 
     <Window.Resources>
         <Style x:Key="GridSplitterStyle" TargetType="GridSplitter">
@@ -76,7 +76,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Місце відправки" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="12" Foreground="Gray"/>
-                <Label Content="Місце відправки" HorizontalAlignment="Left" Margin="15,20,0,0" VerticalAlignment="Top" FontSize="14"/>
+                <Label x:Name="departurePlaceLabel" Content="Місце відправки" HorizontalAlignment="Left" Margin="15,20,0,0" VerticalAlignment="Top" FontSize="14"/>
 
                 <Grid Grid.Row="1">
                     <Label Content="Статус" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="12" Foreground="Gray"/>
@@ -88,7 +88,7 @@
 
                 <Grid Grid.Row="2">
                     <Label Content="Місце доставки" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="12" Foreground="Gray"/>
-                    <Label Content="Місце доставки" HorizontalAlignment="Left" Margin="15,20,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label x:Name="deliveryPlaceLabel" Content="Місце доставки" HorizontalAlignment="Left" Margin="15,20,0,0" VerticalAlignment="Top" FontSize="14"/>
                 </Grid>
             </Grid>
 
@@ -104,11 +104,11 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Відправник" HorizontalAlignment="Left" Margin="5,0,0,25" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Bottom"/>
-                <Label Content="ПІБ" HorizontalAlignment="Left" Margin="8,0,0,10" FontSize="14" Height="29" VerticalAlignment="Bottom"/>
+                <Label x:Name="senderFullNameLabel" Content="ПІБ" HorizontalAlignment="Left" Margin="8,0,0,10" FontSize="14" Height="29" VerticalAlignment="Bottom"/>
 
                 <Grid Grid.Row="1">
                     <Label Content="Номер телефону відправника" HorizontalAlignment="Left" Margin="5,10,0,0" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Top"/>
-                    <Label Content="Номер" HorizontalAlignment="Left" Margin="8,20,0,0" FontSize="14" Height="29" VerticalAlignment="Top"/>
+                    <Label x:Name="senderPhoneNumberLabel" Content="Номер" HorizontalAlignment="Left" Margin="8,20,0,0" FontSize="14" Height="29" VerticalAlignment="Top"/>
                 </Grid>
             </Grid>
 
@@ -119,11 +119,11 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Отримувач" HorizontalAlignment="Left" Margin="5,0,0,25" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Bottom"/>
-                <Label Content="ПІБ" HorizontalAlignment="Left" Margin="8,0,0,10" FontSize="14" Height="29" VerticalAlignment="Bottom"/>
+                <Label x:Name="recipientFullNameLabel" Content="ПІБ" HorizontalAlignment="Left" Margin="8,0,0,10" FontSize="14" Height="29" VerticalAlignment="Bottom"/>
 
                 <Grid Grid.Row="1">
                     <Label Content="Номер телефону отримувач" HorizontalAlignment="Left" Margin="5,10,0,0" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Top"/>
-                    <Label Content="Номер" HorizontalAlignment="Left" Margin="8,20,0,0" FontSize="14" Height="29" VerticalAlignment="Top"/>
+                    <Label x:Name="recipientPhoneNumberLabel" Content="Номер" HorizontalAlignment="Left" Margin="8,20,0,0" FontSize="14" Height="29" VerticalAlignment="Top"/>
                 </Grid>
             </Grid>
         </Grid>

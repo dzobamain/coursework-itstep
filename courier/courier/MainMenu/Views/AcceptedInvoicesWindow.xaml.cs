@@ -46,10 +46,7 @@ namespace courier.MainMenu.Views
             {
                 InformationAboutInvoiceInAcceptedWindow informationAboutInvoiceInAcceptedWindow = new();
 
-                //if (!informationAboutInvoiceInAcceptedWindow.SetAllData(listInvoice[allInvoicesListBox.SelectedIndex]))
-                //{
-                //return;
-                //}
+                informationAboutInvoiceInAcceptedWindow.SetAllData(listInvoice[allInvoicesListBox.SelectedIndex]);
 
                 informationAboutInvoiceInAcceptedWindow.ShowDialog();
             }
