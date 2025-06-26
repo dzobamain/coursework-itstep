@@ -1,48 +1,35 @@
-﻿/*
-    InformationAboutInvoiceInAcceptedWindow.xaml
- */
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
+using System.Windows.Shapes;
 
 namespace courier.MainMenu
 {
     public partial class InformationAboutInvoiceInAcceptedWindow : Window
     {
-        private Invoice currentInvoice;
-
+        private GMapControl mainMap;
+        private GMapMarker transitMarker;
+        private PointLatLng newPosition;
+        
         public InformationAboutInvoiceInAcceptedWindow()
         {
             InitializeComponent();
-
-            GMaps.Instance.Mode = AccessMode.ServerOnly;
-            MainMap.MapProvider = GMapProviders.GoogleMap;
-
-            MainMap.Margin = new Thickness(0, 30, 0, 0);
-            MainMap.MinZoom = 2;
-            MainMap.MaxZoom = 20;
-            MainMap.Zoom = 15;
-            MainMap.ShowCenter = false;
-            MainMap.CanDragMap = true;
-            MainMap.DragButton = MouseButton.Left;
         }
 
         public void SetAllData(Invoice invoice)
         {
+            if (!PlaceForMap(invoice))
+            {
+                this.Close();
+                return;
+            }
+
             if (!string.IsNullOrWhiteSpace(invoice.ShipmentsDescription))
                 shipmentDescriptionLabel.Content = invoice.ShipmentsDescription;
 
@@ -56,7 +43,7 @@ namespace courier.MainMenu
                 senderFullNameLabel.Content = invoice.ShippingData;
 
             var recipientFullName = $"{invoice.RecipientData.FirstName} {invoice.RecipientData.LastName} {invoice.RecipientData.MiddleName}".Trim();
-            if (!string.IsNullOrWhiteSpace(recipientFullName))
+            if (!string.IsNullOrWhiteSpace(recipientFullName.Replace(" ", "")))
                 recipientFullNameLabel.Content = recipientFullName;
 
             if (!string.IsNullOrWhiteSpace(invoice.PecipientAddress))
@@ -76,56 +63,129 @@ namespace courier.MainMenu
 
             if (!string.IsNullOrWhiteSpace(invoice.PaymentMethod))
                 deliveryPaymentFormLabel.Content = invoice.PaymentMethod;
-
-            PlaceForMap(invoice);
         }
 
-
-        private void PlaceForMap(Invoice invoice)
+        private bool PlaceForMap(Invoice invoice)
         {
-            string address = invoice.progress == "created"
-                    ? invoice.ShippingAddress
-                    : invoice.PecipientAddress;
+            map.Children.Clear();
 
-            if (!string.IsNullOrWhiteSpace(address))
+            if (invoice.progress != "created" && invoice.progress != "in_transit" && invoice.progress != "delivered")
             {
-                MainMap.SetPositionByKeywords(address);
-
-                Dispatcher.InvokeAsync(() =>
-                {
-                    if (MainMap.Position.Lat == 0 && MainMap.Position.Lng == 0)
-                    {
-                        MainMap.Position = new PointLatLng(50.4501, 30.5234);
-                    }
-
-                    MainMap.Markers.Clear();
-
-                    var marker = new GMapMarker(MainMap.Position)
-                    {
-                        Shape = new Ellipse
-                        {
-                            Width = 12,
-                            Height = 12,
-                            Fill = Brushes.Red
-                        },
-                        Offset = new Point(-6, -6)
-                    };
-                    MainMap.Markers.Add(marker);
-                }, System.Windows.Threading.DispatcherPriority.Background);
-
+                return false;
             }
+
+            mainMap = new GMapControl
+            {
+                Name = "MainMap",
+                MapProvider = GMapProviders.OpenStreetMap,
+                Margin = new Thickness(25, 0, 25, 0),
+                MinZoom = 2,
+                MaxZoom = 20,
+                Zoom = 15,
+                ShowCenter = false,
+                CanDragMap = true,
+
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch
+            };
+
+            invoice.progress = "in_transit";
+
+            if (invoice.progress == "created")
+            {
+                GMaps.Instance.Mode = AccessMode.ServerOnly;
+
+                string address = invoice.ShippingAddress;
+
+                if (!string.IsNullOrWhiteSpace(address))
+                {
+                    mainMap.SetPositionByKeywords(address);
+                }
+
+                // Якщо координати нульові — дефолт до Києва
+                if (mainMap.Position.Lat == 0 && mainMap.Position.Lng == 0)
+                {
+                    mainMap.Position = new PointLatLng(50.4501, 30.5234);
+                }
+
+                // Очистити маркери, щоб не дублювалися
+                mainMap.Markers.Clear();
+
+                var marker = new GMapMarker(mainMap.Position)
+                {
+                    Shape = new Ellipse
+                    {
+                        Width = 12,
+                        Height = 12,
+                        Fill = Brushes.Red
+                    }
+                };
+                mainMap.Markers.Add(marker);
+
+                // Додати в контейнер
+                map.Children.Add(mainMap);
+            }
+            else if (invoice.progress == "in_transit")
+            {
+                GMaps.Instance.Mode = AccessMode.ServerOnly;
+
+                string address = invoice.PecipientAddress;
+
+                if (!string.IsNullOrWhiteSpace(address))
+                {
+                    mainMap.SetPositionByKeywords(address);
+                }
+
+                if (mainMap.Position.Lat == 0 && mainMap.Position.Lng == 0)
+                {
+                    mainMap.Position = new PointLatLng(50.4501, 30.5234); // Київ
+                }
+
+                mainMap.Markers.Clear();
+
+                transitMarker = new GMapMarker(mainMap.Position)
+                {
+                    Shape = new Ellipse
+                    {
+                        Width = 12,
+                        Height = 12,
+                        Fill = Brushes.Red
+                    }
+                };
+                mainMap.Markers.Add(transitMarker);
+
+                newPosition = mainMap.Position;
+
+                // Додай обробник кліку
+                mainMap.MouseDoubleClick += MainMap_MouseDoubleClick;
+
+                map.Children.Add(mainMap);
+
+                return true;
+            }
+
+
+            return true;
         }
 
         private void MainMap_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // Забороняємо рухати карту і маркер подвійним кліком, щоб позиція зберігалася
+            if (mainMap == null || transitMarker == null) return;
+
+            var point = e.GetPosition(mainMap);
+            PointLatLng clickedPosition = mainMap.FromLocalToLatLng((int)point.X, (int)point.Y);
+
+            transitMarker.Position = clickedPosition;
+
+            newPosition = clickedPosition;
+
             e.Handled = true;
         }
+
 
         private void ReturnBack_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
     }
-
 }

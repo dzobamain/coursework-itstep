@@ -6,7 +6,7 @@
         xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
         xmlns:local="clr-namespace:courier.MainMenu"
         mc:Ignorable="d"
-        Title="TTN" Height="00" Width="1000"
+        Title="TTN" Height="700" Width="1000"
         MinWidth="600" MinHeight="500">
 
     <Window.Resources>
@@ -35,31 +35,36 @@
             <RowDefinition Height="0.02*"/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
-        <GridSplitter Grid.Row="1" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gray" ResizeDirection="Rows" />
-        <GridSplitter Grid.Row="3" Style="{StaticResource GridSplitterStyle}"/>
 
+        <!-- GridSplitter -->
+        <GridSplitter Grid.Row="1" Style="{StaticResource GridSplitterStyle}" />
+        <GridSplitter Grid.Row="3" Style="{StaticResource GridSplitterStyle}" />
+
+        <!-- Верхня панель -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <Button Click="ReturnBack_Click" x:Name="returnBackButton" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Width="40" Height="40" Margin="20,0,0,0">
                 <Image Source="/Images/returnBackImage.jpg" />
             </Button>
             <Label x:Name="invoiceNumberLabel" Content="Номер накладної" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
 
             <Grid Grid.Column="1">
-                <Label Foreground="Gray" Content="Опис відправлення" HorizontalAlignment="Left" Margin="40,0,0,40" FontSize="12" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Bottom"/>
+                <Label Foreground="Gray" Content="Опис відправлення" HorizontalAlignment="Left" Margin="40,0,0,40" FontSize="12" Height="26" VerticalAlignment="Bottom"/>
                 <Label x:Name="shipmentDescriptionLabel" Content="Label" HorizontalAlignment="Left" Margin="45,0,0,8" FontSize="14" Height="29" VerticalAlignment="Bottom"/>
             </Grid>
 
             <Grid Grid.Column="2">
-                <Label Foreground="Gray" Content="Оголошена цінність" HorizontalAlignment="Left" Margin="40,0,0,40" FontSize="12" Height="26" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
-                <Label x:Name="valueLabel" Content="Label" HorizontalAlignment="Left" Margin="45,0,0,8" FontSize="14" Grid.ColumnSpan="2" Height="29" VerticalAlignment="Bottom"/>
+                <Label Foreground="Gray" Content="Оголошена цінність" HorizontalAlignment="Left" Margin="40,0,0,40" FontSize="12" Height="26" VerticalAlignment="Bottom"/>
+                <Label x:Name="valueLabel" Content="Label" HorizontalAlignment="Left" Margin="45,0,0,8" FontSize="14" Height="29" VerticalAlignment="Bottom"/>
             </Grid>
         </Grid>
 
+        <!-- Основна інформація -->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -68,11 +73,12 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
+            <!-- Колонка 1 -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Label Content="Місце відправки" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="12" Foreground="Gray"/>
@@ -92,15 +98,17 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1">
-                <Label Content="Місцезнаходження посилки" Foreground="Gray" Margin="0,5,0,0"/>
-                <gmap:GMapControl x:Name="MainMap" MouseDoubleClick="MainMap_MouseDoubleClick"></gmap:GMapControl>
+            <!-- Карта -->
+            <Grid Grid.Column="1" x:Name="map">
+                <Label Content="Місцезнаходження посилки" Foreground="Gray" Margin="0,0,0,0"/>
+                <gmap:GMapControl x:Name="MainMap" MouseDoubleClick="MainMap_MouseDoubleClick"/>
             </Grid>
 
+            <!-- Відправник -->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Label Content="Відправник" HorizontalAlignment="Left" Margin="5,0,0,25" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Bottom"/>
@@ -112,23 +120,25 @@
                 </Grid>
             </Grid>
 
+            <!-- Отримувач -->
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Label Content="Отримувач" HorizontalAlignment="Left" Margin="5,0,0,25" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Bottom"/>
                 <Label x:Name="recipientFullNameLabel" Content="ПІБ" HorizontalAlignment="Left" Margin="8,0,0,10" FontSize="14" Height="29" VerticalAlignment="Bottom"/>
 
                 <Grid Grid.Row="1">
-                    <Label Content="Номер телефону отримувач" HorizontalAlignment="Left" Margin="5,10,0,0" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Top"/>
+                    <Label Content="Номер телефону отримувача" HorizontalAlignment="Left" Margin="5,10,0,0" FontSize="12" Foreground="Gray" Height="26" VerticalAlignment="Top"/>
                     <Label x:Name="recipientPhoneNumberLabel" Content="Номер" HorizontalAlignment="Left" Margin="8,20,0,0" FontSize="14" Height="29" VerticalAlignment="Top"/>
                 </Grid>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="6">
+        <!-- Нижня секція (вартість, платник, оплата) -->
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
