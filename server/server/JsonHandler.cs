@@ -1,105 +1,106 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace server
+namespace Server.Data.Json
 {
     class JsonHandler
     {
-        public List<User> ReadUsersFromJson(string jsonPath)
+        public List<Models.User> ReadUsersFromJson(string jsonPath)
         {
             try
             {
                 if (!File.Exists(jsonPath))
                 {
-                    return new List<User>();
+                    return new List<Models.User>();
                 }
 
                 string json = File.ReadAllText(jsonPath);
                 if (string.IsNullOrWhiteSpace(json))
                 {
-                    return new List<User>();
+                    return new List<Models.User>();
                 }
 
-                return JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();
+                return JsonConvert.DeserializeObject<List<Models.User>>(json) ?? new List<Models.User>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error UserVerifier.ReadUsersFromJson(): {ex}");
-                return new List<User>();
+                return new List<Models.User>();
             }
         }
 
-        public List<Courier> ReadCouriersFromJson(string jsonPath)
+        public List<Models.Courier> ReadCouriersFromJson(string jsonPath)
         {
             try
             {
                 if (!File.Exists(jsonPath))
                 {
-                    return new List<Courier>();
+                    return new List<Models.Courier>();
                 }
 
                 string json = File.ReadAllText(jsonPath);
                 if (string.IsNullOrWhiteSpace(json))
                 {
-                    return new List<Courier>();
+                    return new List<Models.Courier>();
                 }
 
-                return JsonConvert.DeserializeObject<List<Courier>>(json) ?? new List<Courier>();
+                return JsonConvert.DeserializeObject<List<Models.Courier>>(json) ?? new List<Models.Courier>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error UserVerifier.ReadUsersFromJson(): {ex}");
-                return new List<Courier>();
+                return new List<Models.Courier>();
             }
         }
 
-        public User ReadUserFromJson(string filePath)
+        public Models.User ReadUserFromJson(string filePath)
         {
             try
             {
                 if (!File.Exists(filePath))
                 {
-                    return new User(); /* Return an empty User if the file does not exist */
+                    return new Models.User(); /* Return an empty User if the file does not exist */
                 }
 
                 string json = File.ReadAllText(filePath);
                 if (string.IsNullOrWhiteSpace(json))
                 {
-                    return new User(); /* Return an empty User if the file is empty */
+                    return new Models.User(); /* Return an empty User if the file is empty */
                 }
 
                 /* Deserialize the JSON object directly */
-                return JsonConvert.DeserializeObject<User>(json) ?? new User();
+                return JsonConvert.DeserializeObject<Models.User>(json) ?? new Models.User();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error UserVerifier.ReadUserFromJson(): {ex}");
-                return new User();
+                return new Models.User();
             }
         }
 
-        public bool WriteNewUserToJson(string jsonPath, User newUser)
+        public bool WriteNewUserToJson(string jsonPath, Models.User newUser)
         {
             try
             {
-                string? directory = Path.GetDirectoryName(jsonPath);
+                string? directory = System.IO.Path.GetDirectoryName(jsonPath);
                 if (!string.IsNullOrWhiteSpace(directory))
                 {
                     Directory.CreateDirectory(directory);
                 }
 
-                List<User> allUsers = new List<User>();
+                List<Models.User> allUsers = new List<Models.User>();
 
                 if (File.Exists(jsonPath))
                 {
                     string json = File.ReadAllText(jsonPath);
                     if (!string.IsNullOrWhiteSpace(json))
                     {
-                        allUsers = JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();
+                        allUsers = JsonConvert.DeserializeObject<List<Models.User>>(json) ?? new List<Models.User>();
                     }
                 }
 
@@ -117,24 +118,24 @@ namespace server
             }
         }
 
-        public bool WriteNewInvoiceToJson(string path, Invoice newiInvoices)
+        public bool WriteNewInvoiceToJson(string path, Models.Invoice newiInvoices)
         {
             try
             {
-                string? directory = Path.GetDirectoryName(path);
+                string? directory = System.IO.Path.GetDirectoryName(path);
                 if (!string.IsNullOrWhiteSpace(directory))
                 {
                     Directory.CreateDirectory(directory);
                 }
 
-                List<Invoice> allUsers = new List<Invoice>();
+                List<Models.Invoice> allUsers = new List<Models.Invoice>();
 
                 if (File.Exists(path))
                 {
                     string json = File.ReadAllText(path);
                     if (!string.IsNullOrWhiteSpace(json))
                     {
-                        allUsers = JsonConvert.DeserializeObject<List<Invoice>>(json) ?? new List<Invoice>();
+                        allUsers = JsonConvert.DeserializeObject<List<Models.Invoice>>(json) ?? new List<Models.Invoice>();
                     }
                 }
 

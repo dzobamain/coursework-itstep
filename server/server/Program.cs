@@ -1,154 +1,180 @@
-﻿using client;
-using server;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-class Server
+
+namespace Server
 {
-    static async Task Main()
+    class Server
     {
-        TcpListener server = new TcpListener(IPAddress.Any, 5050);
-        server.Start();
-        Console.WriteLine("[SERVER] Started, waiting for <>.");
-
-        while (true)
+        static async Task Main()
         {
-            TcpClient client = await server.AcceptTcpClientAsync();
-            _ = HandleClient(client);
-        }
-    }
+            TcpListener server = new TcpListener(IPAddress.Any, 5050);
+            server.Start();
+            Console.WriteLine("[SERVER] Started, waiting for <>.");
 
-    static async Task HandleClient(TcpClient client)
-    {
-        NetworkStream stream = client.GetStream();
-
-        try
-        {
-            byte[] buffer = new byte[4096];
-            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-            string json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-
-            using (JsonDocument doc = JsonDocument.Parse(json))
+            while (true)
             {
-                if (!doc.RootElement.TryGetProperty("status", out JsonElement statusElem))
+                TcpClient client = await server.AcceptTcpClientAsync();
+                _ = HandleClient(client);
+            }
+        }
+
+        static async Task HandleClient(TcpClient client)
+        {
+            NetworkStream stream = client.GetStream();
+
+            try
+            {
+                byte[] buffer = new byte[4096];
+                int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                string json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                using (JsonDocument doc = JsonDocument.Parse(json))
                 {
-                    /* No status field in JSON */
-                    await SendResponse(stream, "false");
-                    client.Close();
-                    return;
+                    if (!doc.RootElement.TryGetProperty("status", out JsonElement statusElem))
+                    {
+                        /* No status field in JSON */
+                        await SendResponse(stream, "false");
+                        client.Close();
+                        return;
+                    }
+
+                    string status = statusElem.GetString();
+
+                    string response = "false";
+                    Logic.Validation.DataFormatter dataFormatter = new();
+
+                    switch (status)
+                    {
+                        case "client":
+                            Console.WriteLine("[SERVER] Client connected.");
+                            Models.User user = JsonSerializer.Deserialize<Models.User>(json);
+                            response = await ProcessClientRequest(user);
+
+                            await SendResponse(stream, response);
+                            break;
+
+                        case "courier":
+                            Console.WriteLine("[SERVER] Courier connected.");
+                            Models.Courier сourier = JsonSerializer.Deserialize<Models.Courier>(json);
+                            response = await ProcessCourierRequest(сourier);
+
+                            response = "true"; // ---TEMP---
+                            await SendResponse(stream, response);
+
+                            Data.Path.DataPath dataPath = new();
+                            await SendJsonFile(stream, dataPath.GetInvoicePath());
+                            break;
+
+                        case "package":
+                            Console.WriteLine("[SERVER] Package connected.");
+                            Models.Invoice invoice = JsonSerializer.Deserialize<Models.Invoice>(json);
+                            await ProcessInvoiceRequest(invoice);
+                            break;
+
+                        default:
+                            Console.WriteLine("[SERVER] Invalid status value.");
+                            break;
+                    }
                 }
 
-                string status = statusElem.GetString();
+                client.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[SERVER][ERROR] {ex.Message}");
+                await SendResponse(stream, "false");
+            }
+        }
 
-                string response = "false";
-                DataFormatter dataFormatter = new DataFormatter();
+        static async Task<string> ProcessClientRequest(Models.User user)
+        {
+            string response = "false";
+            Logic.Validation.DataFormatter dataFormatter = new();
 
-                switch (status)
-                {
-                    case "client":
-                        Console.WriteLine("[SERVER] Client connected.");
-                        User user = JsonSerializer.Deserialize<User>(json);
-                        response = await ProcessClientRequest(user);
-
-                        await SendResponse(stream, response);
-                        break;
-
-                    case "courier":
-                        Console.WriteLine("[SERVER] Courier connected.");
-                        Courier сourier = JsonSerializer.Deserialize<Courier>(json);
-                        response = await ProcessCourierRequest(сourier);
-
-                        await SendResponse(stream, response);
-                        break;
-
-                    case "package":
-                        Console.WriteLine("[SERVER] Package connected.");
-                        response = "true";
-
-                        await SendResponse(stream, response);
-                        break;
-
-                    default:
-                        Console.WriteLine("[SERVER] Invalid status value.");
-                        break;
-                }
+            if (!dataFormatter.ValidateUserData(user))
+            {
+                return response;
             }
 
-            client.Close();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"[SERVER][ERROR] {ex.Message}");
-            await SendResponse(stream, "false");
-        }
-    }
+            Data.Json.JsonHandler jsonHandler = new();
+            Data.Path.DataPath usersDataPath = new();
 
-    static async Task<string> ProcessClientRequest(User user)
-    {
-        string response = "false";
-        DataFormatter dataFormatter = new DataFormatter();
+            if (user.regOrLog == "log")
+            {
+                List<Models.User> users = jsonHandler.ReadUsersFromJson(usersDataPath.GetUsersPath());
+                if (dataFormatter.FindUserInList(users, user))
+                {
+                    response = "true";
+                    return response;
+                }
+            }
+            if (user.regOrLog == "reg")
+            {
+                bool result = jsonHandler.WriteNewUserToJson(usersDataPath.GetUsersPath(), user);
+                response = result.ToString().ToLower();
+                return response;
+            }
 
-        if (!dataFormatter.ValidateUserData(user))
-        {
             return response;
         }
 
-        JsonHandler jsonHandler = new JsonHandler();
-        DataPath usersDataPath = new DataPath();
-
-        if (user.regOrLog == "log")
+        static async Task<string> ProcessCourierRequest(Models.Courier сourier)
         {
-            List<User> users = jsonHandler.ReadUsersFromJson(usersDataPath.GetUsersPath());
-            if(dataFormatter.FindUserInList(users, user))
+            string response = "false";
+            Logic.Validation.DataFormatter dataFormatter = new();
+
+            if (!dataFormatter.ValidateCourierData(сourier))
+            {
+                return response;
+            }
+
+            Data.Json.JsonHandler jsonHandler = new();
+            Data.Path.DataPath dataPath = new();
+
+            List<Models.Courier> сouriers = jsonHandler.ReadCouriersFromJson(dataPath.GetCouriersPath());
+            if (dataFormatter.FindCourierInList(сouriers, сourier))
             {
                 response = "true";
                 return response;
             }
-        }
-        if (user.regOrLog == "reg")
-        {
-            bool result = jsonHandler.WriteNewUserToJson(usersDataPath.GetUsersPath(), user);
-            response = result.ToString().ToLower();
+
             return response;
         }
 
-        return response;
-    }
-
-    static async Task<string> ProcessCourierRequest(Courier сourier)
-    {
-        string response = "false";
-        DataFormatter dataFormatter = new DataFormatter();
-
-        if (!dataFormatter.ValidateCourierData(сourier))
+        static async Task ProcessInvoiceRequest(Models.Invoice invoice)
         {
-            return response;
+            Data.Json.JsonHandler jsonHandler = new();
         }
 
-        JsonHandler jsonHandler = new JsonHandler();
-        DataPath dataPath = new DataPath();
-
-        List<Courier> сouriers = jsonHandler.ReadCouriersFromJson(dataPath.GetCouriersPath());
-        if (dataFormatter.FindCourierInList(сouriers, сourier))
+        static async Task SendResponse(NetworkStream stream, string message)
         {
-            return response;
+            Console.WriteLine($"[SERVER] Send response.");
+            byte[] responseBytes = Encoding.UTF8.GetBytes(message);
+            // Send true||false
+            await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
         }
+        static async Task SendJsonFile(NetworkStream stream, string filePath)
+        {
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("Error Server.SendJsonFile(): Json  file, not fond.", filePath);
 
-        return response;
-    }
+            Console.WriteLine($"[SERVER] Send file.");
 
-    static async Task<string> ProcessInvoiceRequest(Invoice invoice)
-    {
+            string jsonContent = await File.ReadAllTextAsync(filePath);
+            byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonContent);
+            int length = jsonBytes.Length;
 
-    }
+            // Length
+            byte[] lengthBytes = BitConverter.GetBytes(length);
+            await stream.WriteAsync(lengthBytes, 0, lengthBytes.Length);
 
-    static async Task SendResponse(NetworkStream stream, string message)
-    {
-        byte[] responseBytes = Encoding.UTF8.GetBytes(message);
-        await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
+            // JSON
+            await stream.WriteAsync(jsonBytes, 0, jsonBytes.Length);
+        }
     }
 }

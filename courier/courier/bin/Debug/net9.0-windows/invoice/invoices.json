@@ -2,43 +2,39 @@
   {
     "status": "package",
     "progress": "created",
-    "OwnerPhoneNumber": "380123456789",
-    "CourierPhoneNumber": "",
-    "PecipientAddress": "Lutsk",
+    "OwnerPhoneNumber": "+380991112233",
+    "CourierPhoneNumber": "+380661234567",
+    "PecipientAddress": "���. ��������, 12, ���",
     "RecipientData": {
-      "Phone": "+3801234567890",
-      "FirstName": "Veronika",
-      "LastName": "Frau",
-      "MiddleName": "Yep"
+      "Name": "����� �������",
+      "Phone": "+380931234567"
     },
-    "ShippingData": "John Doe",
-    "ShippingAddress": "Muenchen",
-    "ParcelComment": "Handle with care",
-    "ShipmentsDescription": "Clothes",
-    "ParcelSize": "Мале (до 2кг)",
-    "Payer": "receiver",
-    "PaymentMethod": "cash",
-    "Price": "173,00"
+    "ShippingData": "2025-06-29",
+    "ShippingAddress": "���. ������������, 5, ����",
+    "ParcelComment": "��������, ������",
+    "ShipmentsDescription": "��������� �����",
+    "ParcelSize": "small",
+    "Payer": "sender",
+    "PaymentMethod": "card",
+    "Price": "150"
   },
   {
     "status": "package",
-    "progress": "in_transit",
-    "OwnerPhoneNumber": "380987654321",
-    "CourierPhoneNumber": "",
-    "PecipientAddress": "Lviv",
+    "progress": "created",
+    "OwnerPhoneNumber": "+380987654321",
+    "CourierPhoneNumber": "+380501112233",
+    "PecipientAddress": "�����. ��������, 101, �����",
     "RecipientData": {
-      "Phone": "+380987654321",
-      "FirstName": "Olena",
-      "LastName": "Ivanova",
-      "MiddleName": "Petrovna"
+      "Name": "���� ��������",
+      "Phone": "+380671234567"
     },
-    "ShippingData": "Ivan Ivanov",
-    "ShippingAddress": "Kyiv",
-    "ParcelComment": "Fragile",
-    "ShipmentsDescription": "Electronics",
-    "ParcelSize": "Середнє (до 5кг)",
-    "Payer": "sender",
-    "PaymentMethod": "card",
-    "Price": "350,00"
+    "ShippingData": "2025-06-30",
+    "ShippingAddress": "���. ѳ����� ��������, 20, �����",
+    "ParcelComment": "��������� �� 18:00",
+    "ShipmentsDescription": "����'������ �������",
+    "ParcelSize": "large",
+    "Payer": "receiver",
+    "PaymentMethod": "cash",
+    "Price": "450"
   }
 ]

@@ -2,38 +2,39 @@
   {
     "status": "package",
     "progress": "created",
-    "OwnerPhoneNumber": "380123456789",
-    "CourierPhoneNumber": "",
-    "PecipientAddress": "Lutsk",
+    "OwnerPhoneNumber": "+380991112233",
+    "CourierPhoneNumber": "+380661234567",
+    "PecipientAddress": "вул. Шевченка, 12, Київ",
     "RecipientData": {
-      "Phone": "+3801234567890",
-      "FirstName": "Veronika",
-      "LastName": "Frau",
-      "MiddleName": "Yep"
+      "Name": "Олена Петрівна",
+      "Phone": "+380931234567"
     },
-    "ShippingData": "Name",
-    "ShippingAddress": "Muenchen",
-    "ParcelComment": "Yep",
-    "ShipmentsDescription": "Yep",
-    "ParcelSize": "РњР°Р»Р° (РґРѕ 2РєРі)",
-    "Payer": "receiver",
-    "PaymentMethod": "cash",
-    "Price": "173,00"
+    "ShippingData": "2025-06-29",
+    "ShippingAddress": "вул. Грушевського, 5, Львів",
+    "ParcelComment": "Обережно, крихке",
+    "ShipmentsDescription": "Керамічний посуд",
+    "ParcelSize": "small",
+    "Payer": "sender",
+    "PaymentMethod": "card",
+    "Price": "150"
   },
   {
     "status": "package",
     "progress": "created",
-    "OwnerPhoneNumber": "380123456789",
-    "CourierPhoneNumber": "",
-    "PecipientAddress": "Odessa",
-    "RecipientData": null,
-    "ShippingData": "1",
-    "ShippingAddress": "Address",
-    "ParcelComment": "Test comment",
-    "ShipmentsDescription": "Test addition",
-    "ParcelSize": "РњР°Р»Р° (РґРѕ 2РєРі)",
+    "OwnerPhoneNumber": "+380987654321",
+    "CourierPhoneNumber": "+380501112233",
+    "PecipientAddress": "просп. Перемоги, 101, Харків",
+    "RecipientData": {
+      "Name": "Іван Іванович",
+      "Phone": "+380671234567"
+    },
+    "ShippingData": "2025-06-30",
+    "ShippingAddress": "вул. Січових Стрільців, 20, Одеса",
+    "ParcelComment": "Доставити до 18:00",
+    "ShipmentsDescription": "Комп'ютерна техніка",
+    "ParcelSize": "large",
     "Payer": "receiver",
-    "PaymentMethod": "card",
-    "Price": "89,00"
+    "PaymentMethod": "cash",
+    "Price": "450"
   }
 ]

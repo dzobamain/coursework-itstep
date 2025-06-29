@@ -4,81 +4,84 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-public class DataFormatter
+namespace Server.Logic.Validation
 {
-    public bool ValidateUserData(User user)
+    public class DataFormatter
     {
-        if (user.regOrLog != "reg" && user.regOrLog != "log")
+        public bool ValidateUserData(Models.User user)
         {
-            return false;
-        }
-
-        if (user.regOrLog == "reg")
-        {
-            if (string.IsNullOrWhiteSpace(user.firstName) ||
-                string.IsNullOrWhiteSpace(user.lastName))
+            if (user.regOrLog != "reg" && user.regOrLog != "log")
             {
                 return false;
             }
+
+            if (user.regOrLog == "reg")
+            {
+                if (string.IsNullOrWhiteSpace(user.firstName) ||
+                    string.IsNullOrWhiteSpace(user.lastName))
+                {
+                    return false;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(user.phoneNumber) ||
+                string.IsNullOrWhiteSpace(user.password))
+            {
+                return false;
+            }
+
+            /* Check phone number (must contain only digits and '+') */
+            if (!Regex.IsMatch(user.phoneNumber, @"^\+?\d+$"))
+            {
+                return false;
+            }
+
+            /* Check password (must be at least 8 characters long) */
+            if (user.password.Length < 8)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        if (string.IsNullOrWhiteSpace(user.phoneNumber) ||
-            string.IsNullOrWhiteSpace(user.password))
+        public bool ValidateCourierData(Models.Courier courier)
         {
-            return false;
+            if (string.IsNullOrWhiteSpace(courier.phoneNumber) ||
+                string.IsNullOrWhiteSpace(courier.password))
+            {
+                return false;
+            }
+
+            /* Check phone number (must contain only digits and '+') */
+            if (!Regex.IsMatch(courier.phoneNumber, @"^\+?\d+$"))
+            {
+                return false;
+            }
+
+            /* Check password (must be at least 8 characters long) */
+            if (courier.password.Length < 8)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        /* Check phone number (must contain only digits and '+') */
-        if (!Regex.IsMatch(user.phoneNumber, @"^\+?\d+$"))
+        public bool FindUserInList(in List<Models.User> allUsers, Models.User inputUser)
         {
-            return false;
+            /* Search for a user in the list by phone number and password */
+            return allUsers.Exists(u =>
+                u.password.Equals(inputUser.password) &&
+                u.phoneNumber.Equals(inputUser.phoneNumber));
         }
 
-        /* Check password (must be at least 8 characters long) */
-        if (user.password.Length < 8)
+        public bool FindCourierInList(in List<Models.Courier> allCouriers, Models.Courier courier)
         {
-            return false;
+            /* Search for a user in the list by phone number and password */
+            return allCouriers.Exists(u =>
+                u.password.Equals(courier.password) &&
+                u.phoneNumber.Equals(courier.phoneNumber));
         }
-
-        return true;
-    }
-
-    public bool ValidateCourierData(Courier courier)
-    {
-        if (string.IsNullOrWhiteSpace(courier.phoneNumber) ||
-            string.IsNullOrWhiteSpace(courier.password))
-        {
-            return false;
-        }
-
-        /* Check phone number (must contain only digits and '+') */
-        if (!Regex.IsMatch(courier.phoneNumber, @"^\+?\d+$"))
-        {
-            return false;
-        }
-
-        /* Check password (must be at least 8 characters long) */
-        if (courier.password.Length < 8)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    public bool FindUserInList(in List<User> allUsers, User inputUser)
-    {
-        /* Search for a user in the list by phone number and password */
-        return allUsers.Exists(u =>
-            u.password.Equals(inputUser.password) &&
-            u.phoneNumber.Equals(inputUser.phoneNumber));
-    }
-
-    public bool FindCourierInList(in List<Courier> allCouriers, Courier courier)
-    {
-        /* Search for a user in the list by phone number and password */
-        return allCouriers.Exists(u =>
-            u.password.Equals(courier.password) &&
-            u.phoneNumber.Equals(courier.phoneNumber));
     }
 }
