@@ -37,7 +37,7 @@ Before running the project, make sure you have the following installed:
   dotnet add package Newtonsoft.Json
   ```
 
-  **GMap.NET.WinPresentation (For maps)**
+- **GMap.NET.WinPresentation (For maps)**
   Install via NuGet Package Manager Console in Visual Studio:  
   ```powershell
   Install-Package GMap.NET.WinPresentation
