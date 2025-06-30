@@ -4,10 +4,10 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using Client;
 
-namespace client.MainMenu.Views
+using System.Windows.Media;
+
+namespace Client.MainMenu.Views
 {
     public partial class CreateInvoinceParcelWindow : UserControl
     {

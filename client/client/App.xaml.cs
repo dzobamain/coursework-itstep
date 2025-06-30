@@ -4,8 +4,9 @@
 using System;
 using System.IO;
 using System.Windows;
+
 using Client.Login;
-using client.MainMenu;
+using Client.MainMenu;
 using Client.Models;
 
 namespace Client

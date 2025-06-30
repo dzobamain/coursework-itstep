@@ -7,9 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 using Client.Models;
-using Client;
 
-namespace client.MainMenu.Views
+namespace Client.MainMenu.Views
 {
     public partial class CreateInvoinceSRWindow : UserControl
     {

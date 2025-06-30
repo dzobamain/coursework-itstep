@@ -3,9 +3,10 @@
  */
 using System;
 using System.Windows;
-using client.MainMenu.Views;
 
-namespace client.MainMenu
+using Client.MainMenu.Views;
+
+namespace Client.MainMenu
 {
     public partial class MainWindow : Window
     {

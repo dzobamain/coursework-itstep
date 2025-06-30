@@ -13,7 +13,7 @@ using GMap.NET.WindowsPresentation;
 
 using Client.Models;
 
-namespace client.MainMenu
+namespace Client.MainMenu
 {
     public partial class InformationAboutInvoiceWindow : Window
     {

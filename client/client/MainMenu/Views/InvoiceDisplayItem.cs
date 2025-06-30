@@ -1,4 +1,4 @@
-﻿namespace client.MainMenu.Views
+﻿namespace Client.MainMenu.Views
 {
     public class InvoiceDisplayItem
     {

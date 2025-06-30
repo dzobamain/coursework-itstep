@@ -1,13 +1,15 @@
 ﻿/*
- MainMenuWindow.xaml.cs
-*/
+ * MainMenuWindow.xaml.cs
+ */
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
-using Client.Models;
 
-namespace client.MainMenu.Views
+using Client.Models;
+using Client.MainMenu;
+
+namespace Client.MainMenu.Views
 {
     public partial class MainMenuWindow : UserControl
     {

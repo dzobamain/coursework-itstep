@@ -3,9 +3,10 @@
  */
 using System;
 using System.Windows;
+
 using Client.Models;
 
-namespace client.MainMenu.Views
+namespace Client.MainMenu.Views
 {
     public partial class AddRecieverInCreatingInvoinceWindow : Window
     {

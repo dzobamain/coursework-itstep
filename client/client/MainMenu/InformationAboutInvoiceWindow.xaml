@@ -1,9 +1,9 @@
-﻿<Window x:Class="client.MainMenu.InformationAboutInvoiceWindow"
+﻿<Window x:Class="Client.MainMenu.InformationAboutInvoiceWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:client.MainMenu"
+        xmlns:local="clr-namespace:Client.MainMenu"
         mc:Ignorable="d"
             Title="TTN" Height="500" Width="1000"
     MinWidth="600" MinHeight="450">
