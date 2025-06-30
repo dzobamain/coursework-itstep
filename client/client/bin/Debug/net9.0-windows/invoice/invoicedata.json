@@ -3,6 +3,7 @@
     "status": "package",
     "progress": "created",
     "OwnerPhoneNumber": "380123456789",
+    "CourierPhoneNumber": "",
     "PecipientAddress": "Lutsk",
     "RecipientData": {
       "Phone": "+3801234567890",
@@ -23,6 +24,7 @@
     "status": "package",
     "progress": "created",
     "OwnerPhoneNumber": "380123456789",
+    "CourierPhoneNumber": "",
     "PecipientAddress": "adess",
     "RecipientData": null,
     "ShippingData": "1",
@@ -33,5 +35,47 @@
     "Payer": "receiver",
     "PaymentMethod": "card",
     "Price": "89,00"
+  },
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "380123456789",
+    "CourierPhoneNumber": "",
+    "PecipientAddress": "1111111111111111111",
+    "RecipientData": {
+      "Phone": "+380",
+      "FirstName": "1111111111111",
+      "LastName": "111111",
+      "MiddleName": "11111"
+    },
+    "ShippingData": "11111111",
+    "ShippingAddress": "111111111111",
+    "ParcelComment": "W",
+    "ShipmentsDescription": "1",
+    "ParcelSize": "Велика(до 30кг)",
+    "Payer": "sender",
+    "PaymentMethod": "cash",
+    "Price": "168,00"
+  },
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "380123456789",
+    "CourierPhoneNumber": "",
+    "PecipientAddress": "Muenchen",
+    "RecipientData": {
+      "Phone": "+380",
+      "FirstName": "1",
+      "LastName": "1",
+      "MiddleName": "1"
+    },
+    "ShippingData": "1",
+    "ShippingAddress": "Lustk",
+    "ParcelComment": "1",
+    "ShipmentsDescription": "опис",
+    "ParcelSize": "Велика(до 30кг)",
+    "Payer": "sender",
+    "PaymentMethod": "card",
+    "Price": "173,00"
   }
 ]

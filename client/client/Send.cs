@@ -1,10 +1,12 @@
-﻿using System;
+﻿/*
+ * Send.cs
+ */
+using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace client.Register
+namespace Client.Network
 {
     class Send
     {

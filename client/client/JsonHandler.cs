@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿/*
+ * JsonHandler.cs
+ */
 using System;
+using Newtonsoft.Json;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Client.Models;
 
-namespace client
+namespace Client.Data.Json
 {
     class JsonHandler
     {
@@ -38,7 +38,7 @@ namespace client
         {
             try
             {
-                string? directory = Path.GetDirectoryName(jsonPath);
+                string? directory = System.IO.Path.GetDirectoryName(jsonPath);
                 if (!string.IsNullOrWhiteSpace(directory))
                 {
                     Directory.CreateDirectory(directory);

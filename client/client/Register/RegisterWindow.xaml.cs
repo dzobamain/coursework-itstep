@@ -1,26 +1,16 @@
 ﻿/*
  * RegisterWindow.xaml.cs
-*/
-
+ */
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.IO;
 
-namespace client.Register
+using Client.Models;
+
+namespace Client.Register
 {
     public partial class RegisterWindow : Window
     {
@@ -44,7 +34,7 @@ namespace client.Register
                 password = passwordTextBox.Text
             };
 
-            DataFormatter dataFormatter = new DataFormatter();
+            Validation.DataFormatter dataFormatter = new();
 
             if (!dataFormatter.ValidateUserData(newUser) || newUser.password != repeatPasswordTextBox.Text)
             {
@@ -52,7 +42,7 @@ namespace client.Register
                 return;
             }
 
-            DataPath userDataPath = new DataPath();
+            Data.Path.DataPath userDataPath = new();
             dataFormatter.WriteUserToJson(userDataPath.GetUserPath(), newUser);
 
             string exePath = System.IO.Path.ChangeExtension(Assembly.GetEntryAssembly()?.Location, ".exe");

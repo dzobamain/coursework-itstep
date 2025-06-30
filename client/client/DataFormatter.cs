@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * DataFormatter.cs
+ */
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml;
 using Newtonsoft.Json;
 
-namespace client.Register
+using Client.Models;
+
+namespace Client.Validation
 {
     class DataFormatter
     {

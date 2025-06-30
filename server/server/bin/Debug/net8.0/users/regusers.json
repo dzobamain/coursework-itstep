@@ -7,5 +7,14 @@
     "middleName": "Veronika",
     "phoneNumber": "380000000004",
     "password": "YepWomen4"
+  },
+  {
+    "status": "client",
+    "regOrLog": "reg",
+    "firstName": "123456789",
+    "lastName": "123456789",
+    "middleName": "123456789",
+    "phoneNumber": "380123456789",
+    "password": "123456789"
   }
 ]

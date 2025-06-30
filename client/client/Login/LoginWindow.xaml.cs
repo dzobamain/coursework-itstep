@@ -1,7 +1,6 @@
 ﻿/*
  * LoginWindow.xaml.cs
-*/
-
+ */
 using System;
 using System.Windows;
 using System.Windows.Media;
@@ -10,10 +9,10 @@ using System.Diagnostics;
 using System.Reflection;
 using System.IO;
 
-using client.Register;
-using client.MainMenu;
+using Client.Models;
+using Client.Register;
 
-namespace client.Login
+namespace Client.Login
 {
     public partial class LoginWindow : Window
     {
@@ -22,9 +21,6 @@ namespace client.Login
         public LoginWindow()
         {
             InitializeComponent();
-
-            
-
             defaultBrush = telephoneNumberTextBox.BorderBrush;
         }
 
@@ -46,7 +42,7 @@ namespace client.Login
                 password = passwordTextBox.Text
             };
 
-            DataFormatter dataFormatter = new DataFormatter();
+            Validation.DataFormatter dataFormatter = new();
 
             if (!dataFormatter.ValidateUserData(user))
             {
@@ -54,7 +50,7 @@ namespace client.Login
                 return;
             }
 
-            DataPath userDataPath = new DataPath();
+            Data.Path.DataPath userDataPath = new();
             dataFormatter.WriteUserToJson(userDataPath.GetUserPath(), user);
 
             string exePath = Path.ChangeExtension(Assembly.GetEntryAssembly()?.Location, ".exe");

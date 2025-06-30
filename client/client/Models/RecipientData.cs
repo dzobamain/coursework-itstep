@@ -1,5 +1,4 @@
-﻿
-namespace client.MainMenu.Views
+﻿namespace Client.Models
 {
     public class RecipientData
     {
@@ -9,4 +8,3 @@ namespace client.MainMenu.Views
         public string MiddleName { get; set; } = string.Empty;
     }
 }
-

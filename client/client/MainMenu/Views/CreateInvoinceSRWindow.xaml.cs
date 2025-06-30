@@ -1,21 +1,13 @@
-﻿//CreateInvoinceSRWindow.xaml.cs
-
-using GMap.NET.MapProviders;
+﻿/*
+ * CreateInvoinceSRWindow.xaml.cs
+ */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using client;
-using client.Register;
+
+using Client.Models;
+using Client;
 
 namespace client.MainMenu.Views
 {
@@ -46,8 +38,8 @@ namespace client.MainMenu.Views
             GlobalData.invoice.status = "package";
             GlobalData.invoice.progress = "created";
 
-            DataPath dataPath = new DataPath();
-            DataFormatter dataFormatter = new DataFormatter();
+            Client.Data.Path.DataPath dataPath = new();
+            Client.Validation.DataFormatter dataFormatter = new();
             User user = dataFormatter.ReadUserFromJson(dataPath.GetUserPath());
             GlobalData.invoice.OwnerPhoneNumber = user.phoneNumber;
 

@@ -1,21 +1,11 @@
 ﻿/*
  * CreateInvoinceParcelWindow.xaml.cs
  */
-
-using client.Register;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Client;
 
 namespace client.MainMenu.Views
 {
@@ -139,8 +129,8 @@ namespace client.MainMenu.Views
 
         private bool SaveNewInvoice()
         {
-            DataPath dataPath = new DataPath();
-            JsonHandler jsonHandler = new JsonHandler();
+            Client.Data.Path.DataPath dataPath = new();
+            Client.Data.Json.JsonHandler jsonHandler = new();
             return jsonHandler.WriteNewInvoiceToJson(dataPath.GetInvoicePath(), GlobalData.invoice);
         }
     }

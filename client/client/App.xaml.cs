@@ -1,12 +1,14 @@
-﻿using System.IO;
+﻿/*
+ * App.xaml.cs
+ */
+using System;
+using System.IO;
 using System.Windows;
-using client.Login;
+using Client.Login;
 using client.MainMenu;
-using client.MainMenu.Views;
-using client.Register;
-using Newtonsoft.Json;
+using Client.Models;
 
-namespace client
+namespace Client
 {
     public partial class App : Application
     {
@@ -19,8 +21,8 @@ namespace client
         {
             base.OnStartup(e);
 
-            DataFormatter dataFormatter = new DataFormatter();
-            DataPath userDataPath = new DataPath();
+            Validation.DataFormatter dataFormatter = new();
+            Data.Path.DataPath userDataPath = new();
 
             string jsonPath = userDataPath.GetUserPath();
 
@@ -34,10 +36,8 @@ namespace client
 
             if (dataFormatter.ValidateUserData(user))
             {
-                //string jsonString = await File.ReadAllTextAsync(jsonPath);
-
-                //string messageFromServer = await Send.SendJsonAsync(jsonPath);
-                bool result = true; //!string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
+                string messageFromServer = await Network.Send.SendJsonAsync(jsonPath);  
+                bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
 
                 if (result)
                 {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * DataPAth.cs
+ */
+using System;
 
-namespace client
+namespace Client.Data.Path
 {
     public class DataPath
     {

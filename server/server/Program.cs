@@ -54,7 +54,6 @@ namespace Server
                             Console.WriteLine("[SERVER] Client connected.");
                             Models.User user = JsonSerializer.Deserialize<Models.User>(json);
                             response = await ProcessClientRequest(user);
-
                             await SendResponse(stream, response);
                             break;
 
@@ -86,7 +85,7 @@ namespace Server
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[SERVER][ERROR] {ex.Message}");
+                Console.WriteLine($"[SERVER][ERROR]: {ex.Message}");
                 await SendResponse(stream, "false");
             }
         }
@@ -95,7 +94,7 @@ namespace Server
         {
             string response = "false";
             Logic.Validation.DataFormatter dataFormatter = new();
-
+            
             if (!dataFormatter.ValidateUserData(user))
             {
                 return response;
@@ -103,23 +102,31 @@ namespace Server
 
             Data.Json.JsonHandler jsonHandler = new();
             Data.Path.DataPath usersDataPath = new();
+            List<Models.User> users = jsonHandler.ReadUsersFromJson(usersDataPath.GetUsersPath());
 
             if (user.regOrLog == "log")
             {
-                List<Models.User> users = jsonHandler.ReadUsersFromJson(usersDataPath.GetUsersPath());
+                Console.WriteLine("log " + response);
                 if (dataFormatter.FindUserInList(users, user))
                 {
                     response = "true";
-                    return response;
                 }
             }
-            if (user.regOrLog == "reg")
+            else if (user.regOrLog == "reg")
             {
-                bool result = jsonHandler.WriteNewUserToJson(usersDataPath.GetUsersPath(), user);
-                response = result.ToString().ToLower();
-                return response;
+                if (dataFormatter.FindUserInList(users, user))
+                {
+                    response = "false";
+                }
+                else
+                {
+                    bool result = jsonHandler.WriteNewUserToJson(usersDataPath.GetUsersPath(), user);
+                    response = result.ToString().ToLower();
+                    
+                }
             }
 
+            Console.WriteLine("return " + response);
             return response;
         }
 

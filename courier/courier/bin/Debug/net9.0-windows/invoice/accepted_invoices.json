@@ -19,5 +19,26 @@
     "Payer": "receiver",
     "PaymentMethod": "cash",
     "Price": "173,00"
+  },
+  {
+    "status": "package",
+    "progress": "created",
+    "OwnerPhoneNumber": "+380991112233",
+    "CourierPhoneNumber": "+380661234567",
+    "PecipientAddress": "���. ��������, 12, ���",
+    "RecipientData": {
+      "Phone": "+380931234567",
+      "FirstName": "",
+      "LastName": "",
+      "MiddleName": ""
+    },
+    "ShippingData": "2025-06-29",
+    "ShippingAddress": "���. ������������, 5, ����",
+    "ParcelComment": "��������, ������",
+    "ShipmentsDescription": "��������� �����",
+    "ParcelSize": "small",
+    "Payer": "sender",
+    "PaymentMethod": "card",
+    "Price": "150"
   }
 ]

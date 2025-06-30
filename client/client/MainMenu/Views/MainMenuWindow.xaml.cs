@@ -1,21 +1,11 @@
 ﻿/*
  MainMenuWindow.xaml.cs
 */
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using Client.Models;
 
 namespace client.MainMenu.Views
 {
@@ -30,8 +20,8 @@ namespace client.MainMenu.Views
             InitializeComponent();
             _main = main;
 
-            DataPath dataPath = new DataPath();
-            JsonHandler jsonHandler = new JsonHandler();
+            Client.Data.Path.DataPath dataPath = new();
+            Client.Data.Json.JsonHandler jsonHandler = new();
             listInvoice = jsonHandler.ReadInvoiceFromJson(dataPath.GetInvoicePath());
 
             SetAllInvoiceDisplayItem(listInvoice);

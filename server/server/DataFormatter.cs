@@ -70,11 +70,16 @@ namespace Server.Logic.Validation
 
         public bool FindUserInList(in List<Models.User> allUsers, Models.User inputUser)
         {
-            /* Search for a user in the list by phone number and password */
+            if(inputUser.regOrLog == "reg")
+            {
+                return allUsers.Exists(u =>
+                u.phoneNumber == inputUser.phoneNumber);
+            }
             return allUsers.Exists(u =>
-                u.password.Equals(inputUser.password) &&
-                u.phoneNumber.Equals(inputUser.phoneNumber));
+                u.phoneNumber == inputUser.phoneNumber &&
+                u.password == inputUser.password);
         }
+
 
         public bool FindCourierInList(in List<Models.Courier> allCouriers, Models.Courier courier)
         {
