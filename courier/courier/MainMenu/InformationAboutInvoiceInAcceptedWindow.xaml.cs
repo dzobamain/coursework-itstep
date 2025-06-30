@@ -1,15 +1,18 @@
-﻿using System;
+﻿/*
+ * InformationAboutInvoiceInAcceptedWindow.cs
+ */
+using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
 using System.Windows.Shapes;
 
-namespace courier.MainMenu
+using Courier.Models;
+
+namespace Courier.MainMenu
 {
     public partial class InformationAboutInvoiceInAcceptedWindow : Window
     {

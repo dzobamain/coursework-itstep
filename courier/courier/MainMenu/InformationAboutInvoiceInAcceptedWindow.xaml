@@ -1,10 +1,10 @@
-﻿<Window x:Class="courier.MainMenu.InformationAboutInvoiceInAcceptedWindow"
+﻿<Window x:Class="Courier.MainMenu.InformationAboutInvoiceInAcceptedWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
-        xmlns:local="clr-namespace:courier.MainMenu"
+        xmlns:local="clr-namespace:Courier.MainMenu"
         mc:Ignorable="d"
         Title="TTN" Height="700" Width="1000"
         MinWidth="600" MinHeight="500">

@@ -1,5 +1,4 @@
-﻿
-namespace courier
+﻿namespace Courier.Models
 {
     public class RecipientData
     {

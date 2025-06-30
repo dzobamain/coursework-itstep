@@ -1,7 +1,6 @@
 ﻿/*
-    MainMenuWindow.xaml.cs
+ * MainMenuWindow.xaml.cs
 */
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace courier.MainMenu.Views
+using Courier.Models;
+
+namespace Courier.MainMenu.Views
 {
     public partial class MainMenuWindow : UserControl
     {
@@ -23,10 +24,10 @@ namespace courier.MainMenu.Views
             InitializeComponent();
             _main = main;
 
-            string path = new CourierDataPath().GetInvoicePath();
-            string acceptedPath = new CourierDataPath().GetAcceptedInvoicePath();
+            string path = new Data.Path.DataPath().GetInvoicePath();
+            string acceptedPath = new Data.Path.DataPath().GetAcceptedInvoicePath();
 
-            JsonHandler jsonHandler = new JsonHandler();
+            Data.Json.JsonHandler jsonHandler = new();
 
             listInvoice = jsonHandler.ReadInvoiceFromJson(path);
 
@@ -90,8 +91,8 @@ namespace courier.MainMenu.Views
                 return;
             }
 
-            JsonHandler jsonHandler = new JsonHandler();
-            string savePath = new CourierDataPath().GetAcceptedInvoicePath();
+            Data.Json.JsonHandler jsonHandler = new();
+            string savePath = new Data.Path.DataPath().GetAcceptedInvoicePath();
 
             bool success = false;
             foreach (var invoice in selectedInvoices)

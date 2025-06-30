@@ -1,15 +1,17 @@
-﻿using System;
+﻿/*
+ * DataPath.cs
+ */
 using System.Runtime.InteropServices;
 
-namespace courier
+namespace Courier.Data.Path
 {
-    public class CourierDataPath
+    public class DataPath
     {
         private readonly string courierData;
         private readonly string invoiceData;
         private readonly string acceptedInvoiceData;
 
-        public CourierDataPath()
+        public DataPath()
         {
             courierData = SetCourierDataPath();
             invoiceData = SetInvoiceDataPath();

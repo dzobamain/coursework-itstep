@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Reflection;
 using System.IO;
-using courier;
 
-namespace client.Login
+using Courier.Models;
+
+namespace Courier.Login
 {
     public partial class LoginWindow : Window
     {
@@ -26,7 +27,7 @@ namespace client.Login
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
-            Courier user = new Courier
+            CourierData user = new CourierData
             {
                 status = "courier",
                 phoneNumber = telephoneNumberTextBox.Text,
@@ -41,7 +42,7 @@ namespace client.Login
                 return;
             }
 
-            CourierDataPath userDataPath = new CourierDataPath();
+            Data.Path.DataPath userDataPath = new();
             dataFormatter.WriteUserToJson(userDataPath.GetCourierDataPath(), user);
 
             string exePath = Path.ChangeExtension(Assembly.GetEntryAssembly()?.Location, ".exe");

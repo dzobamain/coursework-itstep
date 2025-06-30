@@ -1,17 +1,15 @@
-﻿using courier.MainMenu.Views;
+﻿/*
+ * App.xaml.cs
+ */
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows;
-using courier.MainMenu;
-using client.Login;
-using GMap.NET.MapProviders;
 
-namespace courier
+using Courier.Models;
+using Courier.MainMenu;
+using Courier.Login;
+
+namespace Courier
 {
     public partial class App : Application
     {
@@ -25,7 +23,7 @@ namespace courier
             base.OnStartup(e);
 
             DataFormatter dataFormatter = new DataFormatter();
-            CourierDataPath userDataPath = new CourierDataPath();
+            Data.Path.DataPath userDataPath = new();
 
             string jsonPath = userDataPath.GetCourierDataPath();
 
@@ -35,11 +33,11 @@ namespace courier
                 return;
             }
 
-            Courier user = dataFormatter.ReadCourierFromJson(jsonPath);
+            CourierData user = dataFormatter.ReadCourierFromJson(jsonPath);
 
             if (dataFormatter.ValidateUserData(user))
             {
-                string messageFromServer = await Send.SendJsonAndReceiveAllAsync(jsonPath);
+                string messageFromServer = await Network.Send.SendJsonAndReceiveAllAsync(jsonPath);
                 bool result = !string.IsNullOrWhiteSpace(messageFromServer) && bool.TryParse(messageFromServer, out bool parsed) && parsed;
 
                 if (result)

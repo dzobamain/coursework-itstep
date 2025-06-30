@@ -1,17 +1,16 @@
 ﻿/*
-    AcceptedInvoicesWindow.xaml.cs
-*/
-
+ * AcceptedInvoicesWindow.xaml.cs
+ */
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using courier;
 
-namespace courier.MainMenu.Views
+using Courier.Models;
+
+namespace Courier.MainMenu.Views
 {
     public partial class AcceptedInvoicesWindow : UserControl
     {
@@ -24,10 +23,10 @@ namespace courier.MainMenu.Views
             InitializeComponent();
             _main = main;
 
-            string path = new CourierDataPath().GetAcceptedInvoicePath();
-            string acceptedPath = new CourierDataPath().GetAcceptedInvoicePath();
+            string path = new Data.Path.DataPath().GetAcceptedInvoicePath();
+            string acceptedPath = new Data.Path.DataPath().GetAcceptedInvoicePath();
 
-            JsonHandler jsonHandler = new JsonHandler();
+            Data.Json.JsonHandler jsonHandler = new();
             listInvoice = jsonHandler.ReadInvoiceFromJson(path);
 
             SetAllInvoiceDisplayItem(listInvoice);

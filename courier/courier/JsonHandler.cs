@@ -1,36 +1,37 @@
-﻿using Newtonsoft.Json;
+﻿/*
+ * JsonHandler.cs
+ */
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Courier.Models;
 
-namespace courier
+namespace Courier.Data.Json
 {
     class JsonHandler
     {
-        public List<Courier> ReadCouriersFromJson(string jsonPath)
+        public List<CourierData> ReadCouriersFromJson(string jsonPath)
         {
             try
             {
                 if (!File.Exists(jsonPath))
                 {
-                    return new List<Courier>();
+                    return new List<CourierData>();
                 }
 
                 string json = File.ReadAllText(jsonPath);
                 if (string.IsNullOrWhiteSpace(json))
                 {
-                    return new List<Courier>();
+                    return new List<CourierData>();
                 }
 
-                return JsonConvert.DeserializeObject<List<Courier>>(json) ?? new List<Courier>();
+                return JsonConvert.DeserializeObject<List<CourierData>>(json) ?? new List<CourierData>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error JsonHandler.ReadUsersFromJson(): {ex}");
-                return new List<Courier>();
+                return new List<CourierData>();
             }
         }
 
@@ -62,7 +63,7 @@ namespace courier
         {
             try
             {
-                string? directory = Path.GetDirectoryName(path);
+                string? directory = System.IO.Path.GetDirectoryName(path);
                 if (!string.IsNullOrWhiteSpace(directory))
                 {
                     Directory.CreateDirectory(directory);
@@ -84,7 +85,7 @@ namespace courier
         {
             try
             {
-                string? directory = Path.GetDirectoryName(path);
+                string? directory = System.IO.Path.GetDirectoryName(path);
                 if (!string.IsNullOrWhiteSpace(directory))
                 {
                     Directory.CreateDirectory(directory);

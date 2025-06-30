@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * DataFormatter.cs
+ */
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml;
 using Newtonsoft.Json;
 
-namespace courier
+using Courier.Models;
+
+namespace Courier
 {
     class DataFormatter
     {
-        public bool ValidateUserData(Courier courier)
+        public bool ValidateUserData(CourierData courier)
         {
             if (string.IsNullOrWhiteSpace(courier.phoneNumber) ||
                 string.IsNullOrWhiteSpace(courier.password))
@@ -35,7 +35,7 @@ namespace courier
             return true;
         }
 
-        public bool WriteUserToJson(string writeTo, Courier courier)
+        public bool WriteUserToJson(string writeTo, CourierData courier)
         {
             try
             {
@@ -53,28 +53,28 @@ namespace courier
             }
         }
 
-        public Courier ReadCourierFromJson(string filePath)
+        public CourierData ReadCourierFromJson(string filePath)
         {
             try
             {
                 if (!File.Exists(filePath))
                 {
-                    return new Courier();
+                    return new CourierData();
                 }
 
                 string json = File.ReadAllText(filePath);
                 if (string.IsNullOrWhiteSpace(json))
                 {
-                    return new Courier();
+                    return new CourierData();
                 }
 
                 /* Deserialize the JSON object directly */
-                return JsonConvert.DeserializeObject<Courier>(json) ?? new Courier();
+                return JsonConvert.DeserializeObject<CourierData>(json) ?? new CourierData();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error UserVerifier.ReadSingleUserFromJson(): {ex}");
-                return new Courier();
+                return new CourierData();
             }
         }
     }
